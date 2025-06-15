@@ -1,0 +1,332 @@
+name: "NiyrmeMain{number}"
+description: "Main games"
+game:
+  "A Hat in Time": 1
+  "Hollow Knight": 0
+  "Slay the Spire": 1
+  "Terraria": 0
+
+triggers:
+  - option_name: "game"
+    option_result: "A Hat in Time"
+    options:
+      "":
+        name: "NiyrmeAHiT{NUMBER}"
+  - option_category: "A Hat in Time"
+    option_name: "EndGoal"
+    option_result: "finale"
+    options:
+      "A Hat in Time":
+        MinPonCost:
+          random-range-middle-25-50: 25
+        MaxPonCost:
+          random-range-low-100-125: 25
+        FinalChapterMinCost: 25
+        FinalChapterMaxCost: 30
+        EnableDLC2: false
+  - option_category: "A Hat in Time"
+    option_name: "EndGoal"
+    option_result: "rush_hour"
+    options:
+      "A Hat in Time":
+        ActPlando:
+          "Nyakuza Free Roam": "Nyakuza Free Roam"
+  - option_name: "game"
+    option_result: "Hollow Knight"
+    options:
+      "":
+        name: "NiyrmeHK{NUMBER}"
+  - option_name: "game"
+    option_result: "Slay the Spire"
+    options:
+      "":
+        name: "NiyrmeSpire{NUMBER}"
+  - option_name: "game"
+    option_result: "Terraria"
+    options:
+      "":
+        name: "NiyrmeTerraria{NUMBER}"
+
+A Hat in Time:
+  # game
+  progression_balancing: "random-range-middle-45-55"
+  accessibility: "full"
+  death_link: true
+
+  # general
+  EndGoal:
+    finale: 7
+    # rush_hour: 3
+  ShuffleStorybookPages: true
+  ShuffleAlpineZiplines: true
+  ShuffleSubconPaintings: true
+  ShuffleActContracts: true
+  MinPonCost: 20
+  MaxPonCost: 80
+  BadgeSellerMinItems: 5
+  BadgeSellerMaxItems: 8
+  LogicDifficulty: "normal"
+  NoPaintingSkips: true
+  CTRLogic: "time_stop_only"
+
+  # acts
+  ActRandomizer: "light"
+  StartingChapter: "random"
+  LowestChapterCost: 5
+  HighestChapterCost: 25
+  ChapterCostIncrement: "random-range-middle-4-7"
+  ChapterCostMinDifference: 3
+  FinalChapterMinCost: 30
+  FinalChapterMaxCost: 35
+  FinaleShuffle: false
+  ActPlando:
+    "Alpine Free Roam": "Alpine Free Roam"
+
+  # items
+  StartWithCompassBadge: true
+  CompassBadgeMode: "closest"
+  RandomizeHatOrder: "time_stop_last"
+  YarnAvailable: 45
+  YarnCostMin: 5
+  YarnCostMax: 8
+  MinExtraYarn: "random-range-5-15"
+  HatItems: true
+  UmbrellaLogic: false
+  MaxExtraTimePieces: "random-range-10-15"
+  YarnBalancePercent: 25
+  TimePieceBalancePercent: "random-range-45-65"
+
+  # Seal the Deal DLC
+  EnableDLC1: false
+  Tasksanity: false
+  TasksanityTaskStep: 1
+  TasksanityCheckCount: 18
+  ShipShapeCustomTaskGoal: 0
+  ExcludeTour: false
+
+  # Nyakuza Metro DLC
+  EnableDLC2: true
+  MetroMinPonCost: 50
+  MetroMaxPonCost: 125
+  NyakuzaThugMinShopItems: 3
+  NyakuzaThugMaxShopItems: 5
+  BaseballBat: true
+  NoTicketSkips: false
+
+  # Death Wish
+  EnableDeathWish: false
+  DWTimePieceRequirement: 15
+  DWShuffle: false
+  DWShuffleCountMin: 18
+  DWShuffleCountMax: 25
+  DWEnableBonus: false
+  DWAutoCompleteBonuses: true
+  DWExcludeAnnoyingContracts: true
+  DWExcludeAnnoyingBonuses: true
+  DWExcludeCandles: true
+  DeathWishOnly: false
+
+  # traps
+  TrapChance: 0
+  BabyTrapWeight: 0
+  LaserTrapWeight: 0
+  ParadeTrapWeight: 0
+
+  # item & location options
+  non_local_items:
+    - "Hookshot Badge"
+    - "Umbrella"
+  start_inventory:
+    "Sprint Hat": 1
+  exclude_locations:
+    - "Queen Vanessa's Manor - Bedroom Chest"
+    - "Queen Vanessa's Manor - Hall Chest"
+  priority_locations:
+    - "Act Completion (Award Ceremony)"
+    - "Badge Seller - Item 1"
+    - "Badge Seller - Item 2"
+    - "Bluefin Tunnel Thug - Item 1"
+    - "Green Clean Station Thug A - Item 1"
+    - "Green Clean Station Thug B - Item 1"
+    - "Main Station Thug A - Item 1"
+    - "Main Station Thug B - Item 1"
+    - "Main Station Thug C - Item 1"
+    - "Pink Paw Station Thug - Item 1"
+    - "Spaceship - Rumbi Abuse"
+    - "Yellow Overpass Thug A - Item 1"
+    - "Yellow Overpass Thug B - Item 1"
+    - "Yellow Overpass Thug C - Item 1"
+
+Hollow Knight:
+  # game
+  progression_balancing: "random-range-low-50-55"
+  accessibility: "full"
+
+  # randomization
+  RandomizeDreamers: true
+  RandomizeSkills: true
+  RandomizeFocus: false
+  RandomizeSwim: true
+  RandomizeCharms: true
+  RandomizeKeys: true
+  RandomizeMaskShards: true
+  RandomizeVesselFragments: true
+  RandomizeCharmNotches: true
+  RandomizePaleOre: true
+  RandomizeGeoChests: false
+  RandomizeJunkPitChests: true
+  RandomizeRancidEggs: true
+  RandomizeRelics: true
+  RandomizeWhisperingRoots: false
+  RandomizeBossEssence: false
+  RandomizeGrubs: true
+  RandomizeMimics: false
+  RandomizeMaps: true
+  RandomizeStags: false
+  RandomizeLifebloodCocoons: true
+  RandomizeGrimmkinFlames: true
+  RandomizeJournalEntries: false
+  RandomizeNail: false
+  RandomizeGeoRocks: false
+  RandomizeBossGeo: true
+  RandomizeSoulTotems: false
+  RandomizeLoreTablets: false
+  RandomizeElevatorPass: true
+
+  # skips
+  PreciseMovement: false
+  ProficientCombat: false
+  BackgroundObjectPogos: false
+  EnemyPogos: false
+  ObscureSkips: false
+  ShadeSkips: false
+  InfectionSkips: false
+  FireballSkips: false
+  SpikeTunnels: false
+  AcidSkips: false
+  DamageBoosts: false
+  DangerousSkips: false
+  DarkRooms: false
+  ComplexSkips: false
+  DifficultSkips: false
+
+  RemoveSpellUpgrades: false
+  StartLocation:
+    "king's_pass": 1
+  Goal:
+    any: 1
+    hollowknight: 0
+    siblings: 0
+    radiance: 0
+    godhome: 0
+    godhome_flower: 0
+    grub_hunt: 0
+  GrubHuntGoal: "random-high"
+  WhitePalace:
+    exclude: 0
+    kingfragment: 0
+    nopathofpain: 1
+    include: 0
+  ExtraPlatforms: true
+  AddUnshuffledLocations: false
+  StartingGeo: "random-range-low-0-100"
+
+  # deathlink
+  DeathLink: false
+  DeathLinkShade:
+    vanilla: 0
+    shadeless: 0
+    shade: 1
+  DeathLinkBreaksFragileCharms: false
+
+  # shops
+  MinimumGeoPrice: 1
+  MaximumGeoPrice: "random-range-middle-400-600"
+  MinimumGrubPrice: 1
+  MaximumGrubPrice: "random-range-middle-20-30"
+  MinimumEssencePrice: 1
+  MaximumEssencePrice: "random-range-middle-1200-1800"
+  MinimumCharmPrice: 1
+  MaximumCharmPrice: "random-range-low-20-30"
+  RandomCharmCosts: "random-range-middle-75-105"
+  MinimumEggPrice: 1
+  MaximumEggPrice: "random-range-middle-8-12"
+  EggShopSlots: "random-range-low-2-6"
+  SlyShopSlots: "random-range-middle-6-12"
+  SlyKeyShopSlots: "random-range-middle-4-8"
+  IseldaShopSlots: "random-range-middle-3-6"
+  SalubraShopSlots: "random-range-low-4-7"
+  SalubraCharmShopSlots: "random-range-low-4-7"
+  LegEaterShopSlots: "random-range-low-3-5"
+  GrubfatherRewardSlots: "random-range-middle-5-10"
+  SeerRewardSlots: "random-range-low-7-10"
+  ExtraShopSlots: "random-range-low-0-4"
+
+  # cursed abilities
+  SplitCrystalHeart: false
+  SplitMothwingCloak: false
+  SplitMantisClaw: false
+
+  # costsanity
+  CostSanity:
+    "off": 1
+    "on": 0
+    shopsonly: 0
+    notshops: 0
+  CostSanityHybridChance: "random-range-middle-5-10"
+  CostSanityEggWeight: 0
+  CostSanityGrubWeight: 0
+  CostSanityEssenceWeight: 0
+  CostSanityCharmWeight: 0
+  CostSanityGeoWeight: 0
+
+Slay the Spire:
+  # game
+  progression_balancing: "random-range-middle-45-55"
+  accessibility: "full"
+  character:
+    # vanilla
+    "the_ironclad": 1
+    "the_silent": 1
+    "the_defect": 1
+    "the_watcher": 0
+    # modded
+    "the_hermit": 0
+    "the_slime_boss": 0
+    "the_guardian": 0
+    "the_hexaghost": 0
+    "the_champ": 0
+    "the_gremlins": 0
+    "the_automaton": 0
+    "the_snecko": 0
+    "spire_take_the_wheel": 0
+  ascension: 0
+  final_act: false
+  downfall: false
+  death_link:
+    0: 1
+    "random-range-middle-20-30": 0
+
+Terraria:
+  # game
+  progression_balancing: "random-range-low-50-55"
+  accessibility: "full"
+  goal:
+    "mechanical_bosses": 1
+    "plantera": 0
+    "golem": 0
+    "empress_of_light": 0
+    "lunatic_cultist": 0
+    "moon_lord": 0
+    "zenith": 0
+  achievements:
+    "none": 0
+    "exclude_grindy": 1
+    "exclude_fishing": 0
+    "all": 0
+  fill_extra_checks_with: "useful_items"
+  death_link: false
+  non_local_items:
+    - "Hardmode"
+  priority_locations:
+    - "Wall of Flesh"
