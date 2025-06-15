@@ -71,8 +71,8 @@ A Hat in Time:
   LogicDifficulty: "normal"
   NoPaintingSkips: true
   CTRLogic:
-    time_stop_only: 1
-    scooter: 0
+    time_stop_only: 0
+    scooter: 1
 
   # acts
   ActRandomizer:
