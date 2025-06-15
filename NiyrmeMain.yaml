@@ -6,6 +6,9 @@ game:
   "Slay the Spire": 1
   "Terraria": 0
 
+requires:
+  version: "0.6.1"
+
 triggers:
   - option_name: "game"
     option_result: "A Hat in Time"
