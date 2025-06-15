@@ -71,7 +71,7 @@ Autopelago:
 
 ChecksFinder:
   # game
-  progression_balancing: "random-range-high-40-50"
+  progression_balancing: "random-range-high-45-55"
   accessibility: "full"
 
 Jigsaw:
