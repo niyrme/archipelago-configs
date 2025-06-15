@@ -310,7 +310,7 @@ Slay the Spire:
     "the_snecko": 0
     "spire_take_the_wheel": 0
   ascension: 0
-  final_act: false
+  final_act: true
   downfall: false
   death_link:
     0: 1
