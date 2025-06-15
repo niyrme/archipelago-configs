@@ -30,6 +30,7 @@ triggers:
     options:
       "A Hat in Time":
         ActPlando:
+          "Alpine Free Roam": "Alpine Free Roam"
           "Nyakuza Free Roam": "Nyakuza Free Roam"
   - option_name: "game"
     option_result: "Hollow Knight"
