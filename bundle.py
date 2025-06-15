@@ -34,7 +34,7 @@ def main() -> int:
 	region = "#region\n" if args.regions else ""
 	endregion = "\n#endregion" if args.regions else ""
 
-	with open(args.output, "w+", encoding="utf-8") as out:
+	with open(args.output, "w+", encoding="utf-8", newline="\n") as out:
 		out.write("\n\n---\n\n".join(f"{region}{f.read().strip()}{endregion}" for f in files) + "\n")
 
 	return 0
