@@ -76,7 +76,7 @@ A Hat in Time:
 
   # acts
   ActRandomizer:
-    light: 1
+    light: 0
     insanity: 1
   StartingChapter: "random"
   LowestChapterCost: 5
