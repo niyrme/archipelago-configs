@@ -15,24 +15,6 @@ triggers:
     options:
       "":
         name: "NiyrmeAHiT{NUMBER}"
-  - option_category: "A Hat in Time"
-    option_name: "EndGoal"
-    option_result: "finale"
-    options:
-      "A Hat in Time":
-        MinPonCost: "random-range-high-25-50"
-        MaxPonCost: "random-range-low-100-125"
-        FinalChapterMinCost: 25
-        FinalChapterMaxCost: 30
-        EnableDLC2: false
-  - option_category: "A Hat in Time"
-    option_name: "EndGoal"
-    option_result: "rush_hour"
-    options:
-      "A Hat in Time":
-        ActPlando:
-          "Alpine Free Roam": "Alpine Free Roam"
-          "Nyakuza Free Roam": "Nyakuza Free Roam"
   - option_name: "game"
     option_result: "Hollow Knight"
     options:
@@ -75,9 +57,7 @@ A Hat in Time:
     scooter: 1
 
   # acts
-  ActRandomizer:
-    light: 0
-    insanity: 1
+  ActRandomizer: "insanity"
   StartingChapter: "random"
   LowestChapterCost: 5
   HighestChapterCost: 25
@@ -91,9 +71,7 @@ A Hat in Time:
 
   # items
   StartWithCompassBadge: true
-  CompassBadgeMode:
-    closest: 0
-    important_first: 1
+  CompassBadgeMode: "closest"
   RandomizeHatOrder: "time_stop_last"
   YarnAvailable: 45
   YarnCostMin: 5
@@ -143,8 +121,6 @@ A Hat in Time:
 
   # item & location options
   non_local_items:
-    - "25 Pons"
-    - "50 Pons"
     - "100 Pons"
     - "Hookshot Badge"
     - "Umbrella"
@@ -164,10 +140,29 @@ A Hat in Time:
     - "Main Station Thug B - Item 1"
     - "Main Station Thug C - Item 1"
     - "Pink Paw Station Thug - Item 1"
-    - "Spaceship - Rumbi Abuse"
     - "Yellow Overpass Thug A - Item 1"
     - "Yellow Overpass Thug B - Item 1"
     - "Yellow Overpass Thug C - Item 1"
+
+  triggers:
+    - option_category: "A Hat in Time"
+      option_name: "EndGoal"
+      option_result: "finale"
+      options:
+        "A Hat in Time":
+          MinPonCost: "random-range-high-25-50"
+          MaxPonCost: "random-range-low-100-125"
+          FinalChapterMinCost: 25
+          FinalChapterMaxCost: 30
+          EnableDLC2: false
+    - option_category: "A Hat in Time"
+      option_name: "EndGoal"
+      option_result: "rush_hour"
+      options:
+        "A Hat in Time":
+          ActPlando:
+            "Alpine Free Roam": "Alpine Free Roam"
+            "Nyakuza Free Roam": "Nyakuza Free Roam"
 
 Hollow Knight:
   # game
