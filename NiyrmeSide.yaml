@@ -2,7 +2,7 @@ name: "NiyrmeSide{number}"
 description: "Side games"
 game:
   "Autopelago": 1
-  "ChecksFinder": 1
+  "ChecksFinder": 0
   "Jigsaw": 1
   "Yacht Dice": 1
 
