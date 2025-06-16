@@ -293,7 +293,7 @@ Slay the Spire:
   accessibility: "full"
   character:
     # vanilla
-    "the_ironclad": 1
+    "the_ironclad": 0
     "the_silent": 1
     "the_defect": 1
     "the_watcher": 0
