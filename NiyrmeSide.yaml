@@ -81,7 +81,7 @@ Jigsaw:
   enable_forced_local_filler_items: true
 
   # gameplay
-  number_of_pieces: "random-range-low-200-300"
+  number_of_pieces: "random-range-middle-150-300"
   rotations: "no_rotation"
 
   # image
