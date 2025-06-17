@@ -58,7 +58,11 @@ A Hat in Time:
 
   # acts
   ActRandomizer: "insanity"
-  StartingChapter: "random"
+  StartingChapter:
+    1: 1
+    2: 1
+    3: 1
+    4: 0
   LowestChapterCost: 5
   HighestChapterCost: 25
   ChapterCostIncrement: "random-range-low-4-6"
