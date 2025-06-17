@@ -50,7 +50,9 @@ A Hat in Time:
   MaxPonCost: 80
   BadgeSellerMinItems: 5
   BadgeSellerMaxItems: 8
-  LogicDifficulty: "normal"
+  LogicDifficulty:
+    normal: 0
+    moderate: 1
   NoPaintingSkips: true
   CTRLogic:
     time_stop_only: 0
