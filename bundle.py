@@ -1,6 +1,11 @@
 import argparse
 import io
 
+class ParsedArgs(argparse.Namespace):
+	files: list[io.TextIOWrapper]
+	regions: bool
+	output: str
+
 def main() -> int:
 	parser = argparse.ArgumentParser()
 	parser.add_argument(
@@ -23,19 +28,22 @@ def main() -> int:
 		default="combined.yaml"
 	)
 
-	args = parser.parse_args()
+	args: ParsedArgs = parser.parse_args()
 
 	if len(args.files) == 0:
 		print("no files provided")
 		return 1
 
-	files: list[io.TextIOWrapper] = args.files
-
-	region = "#region\n" if args.regions else ""
-	endregion = "\n#endregion" if args.regions else ""
-
 	with open(args.output, "w+", encoding="utf-8", newline="\n") as out:
-		out.write("\n\n---\n\n".join(f"{region}{f.read().strip()}{endregion}" for f in files) + "\n")
+		for i, f in enumerate(args.files):
+			if i:
+				out.write("\n\n---\n\n")
+			if args.regions:
+				out.write("#region\n")
+			out.write(f.read().strip())
+			if args.regions:
+				out.write("\n#endregion")
+		out.write("\n")
 
 	return 0
 
