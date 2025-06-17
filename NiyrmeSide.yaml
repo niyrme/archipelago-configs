@@ -37,8 +37,8 @@ Autopelago:
   accessibility: "full"
   fill_with_determination: false
   victory_location:
-    snakes_on_a_planet: 1
-    secret_cache: 4
+    snakes_on_a_planet: 0
+    secret_cache: 1
     captured_goldfish: 0
   enabled_buffs:
     - "Well Fed" # Gets more done
