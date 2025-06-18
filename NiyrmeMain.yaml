@@ -30,7 +30,7 @@ triggers:
   death_link: true
 
   # general
-  EndGoal:
+  &AHiTEndGoal EndGoal:
     &AHiTGoalFinale finale: 7
     &AHiTGoalRush rush_hour: 0 # 3
     &AHiTGoalSeal seal_the_deal: 0
@@ -90,11 +90,11 @@ triggers:
   ExcludeTour: false
 
   # Nyakuza Metro DLC
-  EnableDLC2: true
-  MetroMinPonCost: "random-range-low-20-25"
-  MetroMaxPonCost: "random-range-high-50-75"
-  NyakuzaThugMinShopItems: "random-range-middle-1-3"
-  NyakuzaThugMaxShopItems: "random-range-high-3-5"
+  &NyakuzaDLC EnableDLC2: true
+  MetroMinPonCost: 10
+  MetroMaxPonCost: 50
+  NyakuzaThugMinShopItems: 1
+  NyakuzaThugMaxShopItems: 4
   BaseballBat: true
   NoTicketSkips: "rush_hour"
 
@@ -144,17 +144,17 @@ triggers:
 
   triggers:
     - option_category: *AHiT
-      option_name: "EndGoal"
+      option_name: *AHiTEndGoal
       option_result: *AHiTGoalFinale
       options:
         *AHiT :
-          MinPonCost: "random-range-high-25-50"
-          MaxPonCost: "random-range-low-100-125"
+          MinPonCost: 30
+          MaxPonCost: 100
           FinalChapterMinCost: 25
           FinalChapterMaxCost: 30
-          EnableDLC2: false
+          *NyakuzaDLC : false
     - option_category: *AHiT
-      option_name: "EndGoal"
+      option_name: *AHiTEndGoal
       option_result: *AHiTGoalRush
       options:
         *AHiT :
