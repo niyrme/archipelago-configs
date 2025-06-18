@@ -114,7 +114,7 @@ triggers:
   progression_balancing: "random-range-middle-30-50"
   accessibility: "full"
   game_difficulty: "medium"
-  score_for_last_check: "random-range-low-1000-1100"
+  score_for_last_check: 1000
   &YachtGoalScore score_for_goal: "random-range-low-777-999"
   &YachtMinDiceAndRolls minimal_number_of_dice_and_rolls:
     "5_dice_and_3_rolls": 48
