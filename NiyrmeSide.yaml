@@ -1,37 +1,29 @@
 name: "NiyrmeSide{number}"
 description: "Side games"
 game:
-  "Autopelago": 1
-  "ChecksFinder": 0
-  "Jigsaw": 1
-  "Yacht Dice": 1
+  &Rat "Autopelago": 1
+  &Mines "ChecksFinder": 0
+  &Jigsaw "Jigsaw": 1
+  &Yacht "Yacht Dice": 1
 
 requires:
   version: "0.6.1"
 
 triggers:
   - option_name: "game"
-    option_result: "Autopelago"
-    options:
-      "":
-        name: "NiyrmeRat{number}"
+    option_result: *Rat
+    options: { "": { "name": "NiyrmeRat{number}" } }
   - option_name: "game"
-    option_result: "ChecksFinder"
-    options:
-      "":
-        name: "NiyrmeMines{number}"
+    option_result: *Mines
+    options: { "": { "name": "NiyrmeMines{number}" } }
   - option_name: "game"
-    option_result: "Jigsaw"
-    options:
-      "":
-        name: "NiyrmePuuule{number}"
+    option_result: *Jigsaw
+    options: { "": { "name": "NiyrmePuuule{number}" } }
   - option_name: "game"
-    option_result: "Yacht Dice"
-    options:
-      "":
-        name: "NiyrmeYacht{number}"
+    option_result: *Yacht
+    options: { "": { "name": "NiyrmeYacht{number}" } }
 
-Autopelago:
+*Rat :
   # game
   progression_balancing: "random-range-30-40"
   accessibility: "full"
@@ -69,12 +61,12 @@ Autopelago:
   msg_completed_goal:
     - "NUMBER ONE VICTORY ROYALE!"
 
-ChecksFinder:
+*Mines :
   # game
   progression_balancing: "random-range-high-45-55"
   accessibility: "full"
 
-Jigsaw:
+*Jigsaw :
   # game
   progression_balancing: "random-range-low-0-10"
   accessibility: "full"
@@ -117,7 +109,7 @@ Jigsaw:
   enable_clues: false
   total_size_of_image: 85
 
-Yacht Dice:
+*Yacht :
   # game
   progression_balancing: "random-range-middle-30-50"
   accessibility: "full"
