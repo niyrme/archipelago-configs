@@ -310,7 +310,7 @@ triggers:
   downfall: false
   death_link:
     0: 1
-    "random-range-middle-20-30": 0
+    "random-range-high-10-30": 0
 
 *Terraria :
   # game
