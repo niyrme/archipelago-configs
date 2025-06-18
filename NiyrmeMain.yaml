@@ -12,7 +12,7 @@ requires:
 triggers:
   - option_name: "game"
     option_result: *AHiT
-    options: { "": { "name": "NiyrmeAHiT" } }
+    options: { "": { "name": "NiyrmeAHiT{NUMBER}" } }
   - option_name: "game"
     option_result: *HK
     options: { "": { "name": "NiyrmeHK{NUMBER}" } }
