@@ -25,7 +25,7 @@ triggers:
 
 *AHiT :
   # game
-  progression_balancing: "random-range-middle-45-55"
+  progression_balancing: "random-range-middle-40-60"
   accessibility: "full"
   death_link: true
 
@@ -53,10 +53,10 @@ triggers:
   # acts
   ActRandomizer: "insanity"
   StartingChapter:
-    1: 1
-    2: 1
-    3: 1
-    4: 0
+    1: 1 # Mafia
+    2: 1 # Birds
+    3: 1 # Subcon
+    4: 0 # Alpine
   LowestChapterCost: 5
   HighestChapterCost: 25
   ChapterCostIncrement: "random-range-low-4-6"
@@ -90,7 +90,7 @@ triggers:
   ExcludeTour: false
 
   # Nyakuza Metro DLC
-  &NyakuzaDLC EnableDLC2: true
+  &AHiTDLCNyakuza EnableDLC2: true
   MetroMinPonCost: 10
   MetroMaxPonCost: 50
   NyakuzaThugMinShopItems: 1
@@ -152,7 +152,7 @@ triggers:
           MaxPonCost: 100
           FinalChapterMinCost: 25
           FinalChapterMaxCost: 30
-          *NyakuzaDLC : false
+          *AHiTDLCNyakuza : false
     - option_category: *AHiT
       option_name: *AHiTEndGoal
       option_result: *AHiTGoalRush
