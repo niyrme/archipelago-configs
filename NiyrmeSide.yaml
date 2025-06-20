@@ -1,8 +1,8 @@
 name: "NiyrmeSide{number}"
 description: "Side games"
 game:
-  &Rat "Autopelago": 1
-  &Mines "ChecksFinder": 0
+  &Autopelago "Autopelago": 1
+  &ChecksFinder "ChecksFinder": 0
   &Jigsaw "Jigsaw": 1
   &Yacht "Yacht Dice": 1
 
@@ -11,10 +11,10 @@ requires:
 
 triggers:
   - option_name: "game"
-    option_result: *Rat
+    option_result: *Autopelago
     options: { "": { "name": "NiyrmeRat{number}" } }
   - option_name: "game"
-    option_result: *Mines
+    option_result: *ChecksFinder
     options: { "": { "name": "NiyrmeMines{number}" } }
   - option_name: "game"
     option_result: *Jigsaw
@@ -23,14 +23,14 @@ triggers:
     option_result: *Yacht
     options: { "": { "name": "NiyrmeYacht{number}" } }
 
-*Rat :
+*Autopelago :
   # game
   progression_balancing: "random-range-30-40"
   accessibility: "full"
   fill_with_determination: false
-  victory_location:
-    snakes_on_a_planet: 0
-    secret_cache: 1
+  &AutopelagoVictoryLocation victory_location:
+    &AutopelagoEndLong snakes_on_a_planet: 1
+    secret_cache: 9
     captured_goldfish: 0
   enabled_buffs:
     - "Well Fed" # Gets more done
@@ -39,7 +39,7 @@ triggers:
     - "Stylish" # Better RNG
     - "Confident" # Ignore a trap
     - "Smart" # Next check is progression
-  enabled_traps:
+  &AutopelagoTraps enabled_traps:
     - "Upset Tummy" # Gets less done
     - "Unlucky" # Worse RNG
     - "Sluggish" # Moves slower
@@ -51,6 +51,7 @@ triggers:
     - "Something at {LOCATION} smells good!"
   msg_enter_go_mode:
     - "Go mode. Gotta go fast!"
+    - "I am speed!"
   msg_enter_bk:
     - "BURGER KING!"
   msg_remind_bk:
@@ -58,10 +59,20 @@ triggers:
     - "Please get me out of Burger King. I am getting fat!"
   msg_exit_bk:
     - "Burger king was tasty"
+    - "Time to work off all those calories..."
   msg_completed_goal:
     - "NUMBER ONE VICTORY ROYALE!"
 
-*Mines :
+  triggers:
+    # disable traps for long ending
+    - option_category: *Autopelago
+      option_name: *AutopelagoVictoryLocation
+      option_result: *AutopelagoEndLong
+      options:
+        *Autopelago :
+          *AutopelagoTraps : []
+
+*ChecksFinder :
   # game
   progression_balancing: "random-range-high-45-55"
   accessibility: "full"
@@ -73,7 +84,7 @@ triggers:
   enable_forced_local_filler_items: true
 
   # gameplay
-  number_of_pieces: "random-range-middle-150-300"
+  number_of_pieces: "random-range-middle-150-250"
   rotations: "no_rotation"
 
   # image
@@ -113,7 +124,7 @@ triggers:
   # game
   progression_balancing: "random-range-middle-30-50"
   accessibility: "full"
-  game_difficulty: "medium"
+  game_difficulty: "hard"
   score_for_last_check: 1000
   &YachtGoalScore score_for_goal: "random-range-low-777-999"
   &YachtMinDiceAndRolls minimal_number_of_dice_and_rolls:
