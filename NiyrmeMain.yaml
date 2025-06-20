@@ -276,8 +276,8 @@ triggers:
   CostSanity:
     "off": 1
     "on": 0
-    shopsonly: 0
-    notshops: 0
+    "shopsonly": 0
+    "notshops": 0
   CostSanityHybridChance: "random-range-middle-5-10"
   CostSanityEggWeight: 0
   CostSanityGrubWeight: 0
