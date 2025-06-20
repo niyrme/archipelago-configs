@@ -3,7 +3,7 @@ description: "Main games"
 game:
   &AHiT "A Hat in Time": 1
   &HK "Hollow Knight": 0
-  &SlayTheSpire "Slay the Spire": 1
+  &SlayTheSpire "Slay the Spire": 0
   &Terraria "Terraria": 0
 
 requires:
