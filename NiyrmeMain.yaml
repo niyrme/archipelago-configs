@@ -372,6 +372,7 @@ triggers:
     "the_defect": 1
     "the_watcher": 0
     # modded
+    ## downfall
     "the_hermit": 0
     "the_slime_boss": 0
     "the_guardian": 0
@@ -380,6 +381,7 @@ triggers:
     "the_gremlins": 0
     "the_automaton": 0
     "the_snecko": 0
+    # random
     "spire_take_the_wheel": 0
   ascension: 0
   final_act: true
