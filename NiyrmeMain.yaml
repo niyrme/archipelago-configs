@@ -25,7 +25,7 @@ triggers:
 
 *AHiT :
   # game
-  progression_balancing: "random-range-middle-40-60"
+  progression_balancing: "random-range-middle-45-60"
   accessibility: "full"
   death_link: true
 
@@ -119,6 +119,8 @@ triggers:
 
   # item & location options
   non_local_items:
+    - "25 Pons"
+    - "50 Pons"
     - "100 Pons"
     - "Hookshot Badge"
     - "Umbrella"
