@@ -137,6 +137,8 @@ triggers:
   number_of_roll_fragments_per_roll: "random-high"
   number_of_starting_categories: "random-range-low-2-3"
 
+  alternative_categories: "random-range-low-0-4"
+
   # extra progression
   weight_of_dice: 5
   weight_of_roll: 20
