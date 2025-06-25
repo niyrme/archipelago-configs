@@ -68,8 +68,6 @@ triggers:
   FinalChapterMinCost: 30
   FinalChapterMaxCost: 35
   FinaleShuffle: false
-  ActPlando:
-    &AHiTActAlpine "Alpine Free Roam": *AHiTActAlpine
 
   # items
   StartWithCompassBadge: true
@@ -166,7 +164,6 @@ triggers:
       options:
         *AHiT :
           ActPlando:
-            *AHiTActAlpine : *AHiTActAlpine
             &AHiTActNyakuza "Nyakuza Free Roam": *AHiTActNyakuza
 
 *HK :
