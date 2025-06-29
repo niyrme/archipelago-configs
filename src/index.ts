@@ -1,10 +1,10 @@
+import * as yaml from "@eemeli/yaml";
+import WaitGroup from "@niyrme/wait-group";
+import assert from "node:assert/strict";
 import path from "node:path";
 import * as z from "zod/v4-mini";
 import { getTaggedLabeledErrorFunctionContext, type getLabeledErrorFunction } from "./lib/labeled-error-function";
-import WaitGroup from "./lib/WaitGroup";
 import { prettyZodError } from "./lib/zod";
-import * as yaml from "@eemeli/yaml";
-import assert from "node:assert/strict";
 
 const optionsValidator = z.object({
 	regions: z._default(z.optional(z.boolean()), false),

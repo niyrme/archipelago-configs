@@ -3,6 +3,7 @@
 	"private": true,
 	"dependencies": {
 		"@eemeli/yaml": "npm:@jsr/eemeli__yaml",
+		"@niyrme/wait-group": "npm:@jsr/niyrme__wait-group",
 		"zod": "^3.25.67"
 	},
 	"devDependencies": {

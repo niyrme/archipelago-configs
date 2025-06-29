@@ -5,6 +5,7 @@
       "name": "ap",
       "dependencies": {
         "@eemeli/yaml": "npm:@jsr/eemeli__yaml",
+        "@niyrme/wait-group": "npm:@jsr/niyrme__wait-group",
         "zod": "^3.25.67",
       },
       "devDependencies": {
@@ -19,6 +20,8 @@
   },
   "packages": {
     "@eemeli/yaml": ["@jsr/eemeli__yaml@2.8.0", "https://npm.jsr.io/~/11/@jsr/eemeli__yaml/2.8.0.tgz", {}, "sha512-byW4d7IiAKgIDak7fMfyYQervbscQxtLRSryATH+cvCfmUOpwf/4ziOtQpCBj1dibCHxxdX5zNpo0U21z4HR0g=="],
+
+    "@niyrme/wait-group": ["@jsr/niyrme__wait-group@1.0.1", "https://npm.jsr.io/~/11/@jsr/niyrme__wait-group/1.0.1.tgz", {}, "sha512-1/g5ungMQrAinW2R8hbVQoQZmyG/gqErgPvPv5QJV58kfg+TmoCQbjIdSWlsgFJ343OQmPXekdzrL3JHHxAmhg=="],
 
     "@oxlint/darwin-arm64": ["@oxlint/darwin-arm64@1.3.0", "", { "os": "darwin", "cpu": "arm64" }, "sha512-TcCaETXYfiEfS+u/gZNND4WwEEtnJJjqg8BIC56WiCQDduYTvmmbQ0vxtqdNXlFzlvmRpZCSs7qaqXNy8/8FLA=="],
 
