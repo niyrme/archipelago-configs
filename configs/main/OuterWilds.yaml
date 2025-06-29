@@ -1,0 +1,73 @@
+game: &OuterWilds "Outer Wilds"
+
+name: "niyrme-OW{NUMBER}"
+
+*OuterWilds :
+  # game
+  progression_balancing: "random-range-middle-50-60"
+  accessibility: "full"
+  goal:
+    "song_of_five": 1
+    "song_of_the_nomai": 1
+    "song_of_the_stranger": 0
+    "song_of_six": 1
+    "song_of_seven": 0
+    "echoes_of_the_eye": 0
+  spawn:
+    "vanilla": 1
+    "hourglass_twins": 0
+    "timber_hearth": 0
+    "brittle_hollow": 0
+    "giants_deep": 0
+    "stranger": 0
+    "random_non_vanilla": 0
+  early_key_item:
+    "off": 1
+    "any": 0
+    "translator": 0
+    "nomai_warp_codes": 0
+    "launch_codes": 0
+    "stranger_light_modulator": 0
+
+  # DLC
+  enable_eote_dlc: false
+  dlc_only: false
+
+  # randomization
+  randomize_coordinates: true
+  randomize_orbits: false
+  randomize_rotations: false
+  randomize_warp_platforms: false
+  randomize_dark_bramble_layout: false
+
+  # traps
+  trap_chance: 5
+  trap_type_weights:
+    "Audio Trap": 1
+    "HUD Corruption Trap": 1
+    "Ice Physics Trap": 0
+    "Map Disable Trap": 0
+    "Nap Trap": 0
+    "Ship Damage Trap": 0
+    "Suit Puncture Trap": 1
+    "Supernova Trap": 0
+
+  # misc
+  upgrade_counts:
+    "Boost Duration Upgrade": 3
+    "Fuel Capacity Upgrade": 3
+    "Oxygen Capacity Upgrade": 3
+  death_link:
+    "off": 1
+    "default": 0  # player caused/non-natural
+    "all_deaths": 0
+  logsanity: false
+  shuffle_spacesuit: false
+  split_translator: false
+
+  # mods
+  enable_hn1_mod: false  # Hearth's Neighbor
+  enable_outsider_mod: false  # The Outsider
+  enable_ac_mod: false  # Astral Codec
+  enable_hn2_mod: false  # Hearth's Neighbor 2
+  enable_fq_mod: false  # Fret's Quest

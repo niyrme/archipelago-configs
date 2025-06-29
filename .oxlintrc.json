@@ -1,0 +1,36 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": [
+		"react",
+		"unicorn",
+		"typescript",
+		"oxc",
+		"import",
+		"react-perf",
+		"promise"
+	],
+	"env": {
+		"builtin": true,
+		"browser": true,
+		"node": true
+	},
+	"settings": {
+		"react": {
+			"formComponents": [
+				"Form"
+			],
+			"linkComponents": [
+				"Link",
+				"NavLink"
+			]
+		}
+	},
+	"ignorePatterns": [
+		"./.cache",
+		"./.react-router",
+		"./.vscode",
+		"./drizzle",
+		"./node_modules",
+		"public"
+	]
+}

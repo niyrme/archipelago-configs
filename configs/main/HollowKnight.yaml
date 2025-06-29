@@ -1,0 +1,126 @@
+game: &HollowKnight "Hollow Knight"
+
+name: "niyrme-HK{NUMBER}"
+
+*HollowKnight :
+  # game
+  progression_balancing: "random-range-low-50-55"
+  accessibility: "full"
+
+  # randomization
+  RandomizeDreamers: true
+  RandomizeSkills: true
+  RandomizeFocus: false
+  RandomizeSwim: true
+  RandomizeCharms: true
+  RandomizeKeys: true
+  RandomizeMaskShards: true
+  RandomizeVesselFragments: true
+  RandomizeCharmNotches: true
+  RandomizePaleOre: true
+  RandomizeGeoChests: false
+  RandomizeJunkPitChests: true
+  RandomizeRancidEggs: true
+  RandomizeRelics: true
+  RandomizeWhisperingRoots: false
+  RandomizeBossEssence: false
+  RandomizeGrubs: true
+  RandomizeMimics: false
+  RandomizeMaps: true
+  RandomizeStags: false
+  RandomizeLifebloodCocoons: true
+  RandomizeGrimmkinFlames: true
+  RandomizeJournalEntries: false
+  RandomizeNail: false
+  RandomizeGeoRocks: false
+  RandomizeBossGeo: true
+  RandomizeSoulTotems: false
+  RandomizeLoreTablets: false
+  RandomizeElevatorPass: true
+
+  # skips
+  PreciseMovement: false
+  ProficientCombat: false
+  BackgroundObjectPogos: false
+  EnemyPogos: false
+  ObscureSkips: false
+  ShadeSkips: false
+  InfectionSkips: false
+  FireballSkips: false
+  SpikeTunnels: false
+  AcidSkips: false
+  DamageBoosts: false
+  DangerousSkips: false
+  DarkRooms: false
+  ComplexSkips: false
+  DifficultSkips: false
+
+  RemoveSpellUpgrades: false
+  StartLocation:
+    "king's_pass": 1
+  Goal:
+    any: 0
+    hollowknight: 0
+    siblings: 1
+    radiance: 0
+    godhome: 0
+    godhome_flower: 0
+    grub_hunt: 0
+  GrubHuntGoal: "random-high"
+  WhitePalace:
+    exclude: 0
+    kingfragment: 0
+    nopathofpain: 1
+    include: 0
+  ExtraPlatforms: true
+  AddUnshuffledLocations: false
+  StartingGeo: "random-range-low-0-100"
+
+  # deathlink
+  DeathLink: false
+  DeathLinkShade:
+    vanilla: 0
+    shadeless: 0
+    shade: 1
+  DeathLinkBreaksFragileCharms: false
+
+  # shops
+  MinimumGeoPrice: 1
+  MaximumGeoPrice: "random-range-middle-400-600"
+  MinimumGrubPrice: 1
+  MaximumGrubPrice: "random-range-middle-20-30"
+  MinimumEssencePrice: 1
+  MaximumEssencePrice: "random-range-middle-1200-1800"
+  MinimumCharmPrice: 1
+  MaximumCharmPrice: "random-range-low-20-30"
+  RandomCharmCosts: "random-range-middle-75-105"
+  MinimumEggPrice: 1
+  MaximumEggPrice: "random-range-middle-8-12"
+  EggShopSlots: "random-range-low-2-6"
+  SlyShopSlots: "random-range-middle-6-12"
+  SlyKeyShopSlots: "random-range-middle-4-8"
+  IseldaShopSlots: "random-range-middle-3-6"
+  SalubraShopSlots: "random-range-low-4-7"
+  SalubraCharmShopSlots: "random-range-low-4-7"
+  LegEaterShopSlots: "random-range-low-3-5"
+  GrubfatherRewardSlots: "random-range-middle-5-10"
+  SeerRewardSlots: "random-range-low-7-10"
+  ExtraShopSlots: "random-range-low-0-4"
+
+  # cursed abilities
+  SplitCrystalHeart: false
+  SplitMothwingCloak: false
+  SplitMantisClaw: false
+
+  # costsanity
+  CostSanity:
+    "off": 1
+    "on": 0
+    "shopsonly": 0
+    "notshops": 0
+  CostSanityHybridChance: "random-range-middle-5-10"
+  CostSanityEggWeight: 0
+  CostSanityGrubWeight: 0
+  CostSanityEssenceWeight: 0
+  CostSanityCharmWeight: 0
+  CostSanityGeoWeight: 0

@@ -1,0 +1,142 @@
+game: &AHiT "A Hat in Time"
+
+name: "niyrme-AHiT{NUMBER}"
+
+*AHiT :
+  # game
+  progression_balancing: "random-range-middle-45-60"
+  accessibility: "full"
+  death_link: true
+
+  # general
+  &AHiTEndGoal EndGoal:
+    &AHiTGoalFinale finale: 7
+    &AHiTGoalRush rush_hour: 0 # 3
+    &AHiTGoalSeal seal_the_deal: 0
+  ShuffleStorybookPages: true
+  ShuffleAlpineZiplines: true
+  ShuffleSubconPaintings: true
+  ShuffleActContracts: true
+  MinPonCost: 20
+  MaxPonCost: 80
+  BadgeSellerMinItems: 5
+  BadgeSellerMaxItems: 8
+  LogicDifficulty:
+    normal: 0
+    moderate: 1
+  NoPaintingSkips: true
+  CTRLogic:
+    time_stop_only: 0
+    scooter: 1
+
+  # acts
+  ActRandomizer: "insanity"
+  StartingChapter:
+    1: 1 # Mafia
+    2: 1 # Birds
+    3: 1 # Subcon
+    4: 0 # Alpine
+  LowestChapterCost: 5
+  HighestChapterCost: 25
+  ChapterCostIncrement: "random-range-low-4-6"
+  ChapterCostMinDifference: 3
+  FinalChapterMinCost: 30
+  FinalChapterMaxCost: 35
+  FinaleShuffle: false
+
+  # items
+  StartWithCompassBadge: true
+  CompassBadgeMode: "closest"
+  RandomizeHatOrder: "time_stop_last"
+  YarnAvailable: 45
+  YarnCostMin: 5
+  YarnCostMax: 8
+  MinExtraYarn: "random-range-5-15"
+  HatItems: true
+  UmbrellaLogic: true
+  MaxExtraTimePieces: "random-range-10-15"
+  YarnBalancePercent: 25
+  TimePieceBalancePercent: "random-range-low-40-60"
+
+  # Seal the Deal DLC
+  EnableDLC1: false
+  Tasksanity: false
+  TasksanityTaskStep: 1
+  TasksanityCheckCount: 18
+  ShipShapeCustomTaskGoal: 0
+  ExcludeTour: false
+
+  # Nyakuza Metro DLC
+  &AHiTDLCNyakuza EnableDLC2: true
+  MetroMinPonCost: 10
+  MetroMaxPonCost: 50
+  NyakuzaThugMinShopItems: 1
+  NyakuzaThugMaxShopItems: 4
+  BaseballBat: true
+  NoTicketSkips: "rush_hour"
+
+  # Death Wish
+  EnableDeathWish: false
+  DWTimePieceRequirement: 15
+  DWShuffle: false
+  DWShuffleCountMin: 18
+  DWShuffleCountMax: 25
+  DWEnableBonus: false
+  DWAutoCompleteBonuses: true
+  DWExcludeAnnoyingContracts: true
+  DWExcludeAnnoyingBonuses: true
+  DWExcludeCandles: true
+  DeathWishOnly: false
+
+  # traps
+  TrapChance: 0
+  BabyTrapWeight: 0
+  LaserTrapWeight: 0
+  ParadeTrapWeight: 0
+
+  # item & location options
+  non_local_items:
+    - "25 Pons"
+    - "50 Pons"
+    - "100 Pons"
+    - "Hookshot Badge"
+    - "Umbrella"
+  start_inventory:
+    "Sprint Hat": 1
+  exclude_locations:
+    - "Queen Vanessa's Manor - Bedroom Chest"
+    - "Queen Vanessa's Manor - Hall Chest"
+  priority_locations:
+    - "Act Completion (Award Ceremony)"
+    - "Badge Seller - Item 1"
+    - "Badge Seller - Item 2"
+    - "Bluefin Tunnel Thug - Item 1"
+    - "Green Clean Station Thug A - Item 1"
+    - "Green Clean Station Thug B - Item 1"
+    - "Mafia Boss Shop Item"
+    - "Main Station Thug A - Item 1"
+    - "Main Station Thug B - Item 1"
+    - "Main Station Thug C - Item 1"
+    - "Pink Paw Station Thug - Item 1"
+    - "Yellow Overpass Thug A - Item 1"
+    - "Yellow Overpass Thug B - Item 1"
+    - "Yellow Overpass Thug C - Item 1"
+
+  triggers:
+    - option_category: *AHiT
+      option_name: *AHiTEndGoal
+      option_result: *AHiTGoalFinale
+      options:
+        *AHiT :
+          MinPonCost: 30
+          MaxPonCost: 100
+          FinalChapterMinCost: 25
+          FinalChapterMaxCost: 30
+          *AHiTDLCNyakuza : false
+    - option_category: *AHiT
+      option_name: *AHiTEndGoal
+      option_result: *AHiTGoalRush
+      options:
+        *AHiT :
+          ActPlando:
+            &AHiTActNyakuza "Nyakuza Free Roam": *AHiTActNyakuza

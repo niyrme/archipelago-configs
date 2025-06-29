@@ -1,0 +1,20 @@
+{
+	"options": {
+		"basePath": "configs",
+		"output": ".ignore/Niyrme.yaml",
+		"requiredVersion": "0.6.1"
+	},
+	"bundles": {
+		"NiyrmeMain": [
+			{ "file": "main/AHatInTime.yaml" }
+		],
+		"NiyrmeSide": [
+			{ "file": "side/Jigsaw.yaml" },
+			{ "file": "side/Yacht.yaml" }
+		]
+	},
+	"presets": {
+		"default": ["bundle:NiyrmeMain", "bundle:NiyrmeSide", "bundle:NiyrmeSide"],
+		"short": ["bundle:NiyrmeMain", "bundle:NiyrmeSide"]
+	}
+}
