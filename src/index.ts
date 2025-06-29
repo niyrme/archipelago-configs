@@ -223,7 +223,7 @@ async function main(): Promise<number> {
 	}
 
 	outputSink.write("\n");
-	await outputSink.flush();
+	await outputSink.end();
 
 	return 0;
 }
