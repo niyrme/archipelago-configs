@@ -8,7 +8,7 @@ name: "niyrme-puuule{number}"
   accessibility: "full"
 
   # gameplay
-  number_of_pieces: "random-range-middle-150-250"
+  number_of_pieces: "random-range-middle-100-200"
   rotations: "no_rotation"
 
   # image
@@ -24,19 +24,17 @@ name: "niyrme-puuule{number}"
 
   # extra pieces
   percentage_of_extra_pieces: "random-range-high-5-10"
-  number_of_piece_bundles: "random-range-low-25-75"
-  minimum_number_of_pieces_per_bundle:
-    1: 1
-    "random-range-low-1-3": 0
+  number_of_piece_bundles: "random-range-low-25-50"
+  minimum_number_of_pieces_per_bundle: 2
   add_fillers: false
   percentage_fillers_itempool: 0
-  checks_out_of_logic: 1
+  checks_out_of_logic: 0
 
   # piece order
   piece_order_type: "random_order"
-  strictness_piece_order_type: "random-range-high-80-100"
+  strictness_piece_order_type: "random-range-middle-75-100"
   piece_order: "random_order"
-  strictness_piece_order: "random-range-high-80-100"
+  strictness_piece_order: "random-range-middle-75-100"
 
   # traps
   starting_fake_pieces: 0
