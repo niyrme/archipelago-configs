@@ -1,6 +1,5 @@
 import * as yaml from "@eemeli/yaml";
 import WaitGroup from "@niyrme/wait-group";
-import assert from "node:assert/strict";
 import path from "node:path";
 import * as z from "zod/v4-mini";
 import { getTaggedLabeledErrorFunctionContext, type getLabeledErrorFunction } from "./lib/labeled-error-function";
@@ -103,9 +102,11 @@ async function makeBundle(name: string, bundle: Bundle, version: Version, baseDi
 			} satisfies NameTrigger,
 			...triggers
 		);
-		const keys = Object.keys(parsed);
-		assert(keys.length === 1, `Expected exactly one game, found ${keys.length}`);
-		config[parsedGame] = parsed[keys[0]!]!;
+		const game = parsed[parsedGame];
+		if (!game) {
+			throw new Error(`Config ${name} is missing game config: ${parsedGame}`);
+		}
+		config[parsedGame] = game;
 	}
 
 	if (!config.triggers!.length) {
