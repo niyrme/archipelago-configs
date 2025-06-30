@@ -5,16 +5,16 @@
 		"requiredVersion": "0.6.1"
 	},
 	"bundles": {
-		"NiyrmeMain": [
+		"NiyrmeMain{NUMBER}": [
 			{ "file": "main/AHatInTime.yaml" }
 		],
-		"NiyrmeSide": [
+		"NiyrmeSide{number}": [
 			{ "file": "side/Jigsaw.yaml" },
 			{ "file": "side/Yacht.yaml" }
 		]
 	},
 	"presets": {
-		"default": ["bundle:NiyrmeMain", "bundle:NiyrmeSide", "bundle:NiyrmeSide"],
-		"short": ["bundle:NiyrmeMain", "bundle:NiyrmeSide"]
+		"default": ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}", "bundle:NiyrmeSide{number}"],
+		"short": ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}"]
 	}
 }
