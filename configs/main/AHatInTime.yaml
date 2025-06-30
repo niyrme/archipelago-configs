@@ -31,11 +31,7 @@ name: "niyrme-AHiT{NUMBER}"
 
   # acts
   ActRandomizer: "insanity"
-  StartingChapter:
-    1: 1 # Mafia
-    2: 1 # Birds
-    3: 1 # Subcon
-    4: 0 # Alpine
+  StartingChapter: "random"
   LowestChapterCost: 5
   HighestChapterCost: 25
   ChapterCostIncrement: "random-range-low-4-6"
