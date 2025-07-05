@@ -23,21 +23,19 @@ name: "niyrme-AHiT{NUMBER}"
   MaxPonCost: 80
   BadgeSellerMinItems: 5
   BadgeSellerMaxItems: 8
-  LogicDifficulty:
-    normal: 0
-    moderate: 1
+  LogicDifficulty: "moderate"
   NoPaintingSkips: true
-  CTRLogic:
-    time_stop_only: 0
-    scooter: 1
+  CTRLogic: "scooter"
 
   # acts
   ActRandomizer: "insanity"
   StartingChapter: "random"
-  LowestChapterCost: 5
-  HighestChapterCost: 25
+  LowestChapterCost: "random-range-low-4-8"
+  HighestChapterCost: "random-range-middle-25-30"
   ChapterCostIncrement: "random-range-low-4-6"
-  ChapterCostMinDifference: 3
+  ChapterCostMinDifference:
+    4: 1
+    5: 1
   FinalChapterMinCost: 30
   FinalChapterMaxCost: 35
   FinaleShuffle: true
