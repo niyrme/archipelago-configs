@@ -66,8 +66,8 @@ name: "niyrme-OW{NUMBER}"
   split_translator: false
 
   # mods
-  enable_hn1_mod: false  # Hearth's Neighbor
+  enable_hn1_mod: false       # Hearth's Neighbor
   enable_outsider_mod: false  # The Outsider
-  enable_ac_mod: false  # Astral Codec
-  enable_hn2_mod: false  # Hearth's Neighbor 2
-  enable_fq_mod: false  # Fret's Quest
+  enable_ac_mod: false        # Astral Codec
+  enable_hn2_mod: false       # Hearth's Neighbor 2
+  enable_fq_mod: false        # Fret's Quest
