@@ -1,118 +1,23 @@
 import * as yaml from "@eemeli/yaml";
 import WaitGroup from "@niyrme/wait-group";
 import path from "node:path";
-import * as z from "zod/v4-mini";
+import { makeBundle } from "./lib/bundle";
+import { configValidator } from "./lib/config";
 import { getTaggedLabeledErrorFunctionContext, type getLabeledErrorFunction } from "./lib/labeled-error-function";
 import { prettyZodError } from "./lib/zod";
-
-const optionsValidator = z.object({
-	regions: z._default(z.optional(z.boolean()), false),
-	output: z._default(z.optional(z.string()), "bundled.yaml"),
-	basePath: z._default(z.optional(z.string()), "."),
-	requiredVersion: z.string({ error: "Field is required" }).check(z.regex(/^\d+\.\d+\.\d+$/)),
-});
-const bundlesValidator = z.record(
-	z.string(),
-	z
-		.array(
-			z.object({
-				file: z.string(),
-				weight: z._default(z.optional(z.int()), 1).check(z.minimum(0, "weight must be at least 0")),
-			})
-		)
-		.check(z.minLength(1, "At least one file is required per bundle"))
-);
-const presetsValidator = z.record(
-	z.string(),
-	z
-		.array(z.string().check(z.regex(/^(bundle|file):(.+)$/)))
-		.check(z.minLength(1, "At least one input file or bundle is required per preset"))
-);
-
-const configValidator = z.object({
-	options: optionsValidator,
-	bundles: bundlesValidator,
-	presets: presetsValidator,
-});
 
 async function checkFile(filePath: string, error: ReturnType<typeof getLabeledErrorFunction>): Promise<boolean> {
 	const file = Bun.file(path.resolve(filePath));
 	if (!(await file.exists())) {
-		error(`File ${path.basename(filePath)} does not exist`);
+		error(`File ${filePath} does not exist`);
 		return false;
 	}
 	const stat = await file.stat();
 	if (!stat.isFile()) {
-		error(`Input is not a file: ${path.basename(filePath)}`);
+		error(`Input is not a file: ${filePath}`);
 		return false;
 	}
 	return true;
-}
-
-interface NameTrigger {
-	option_name: "game";
-	option_result: string;
-	options: { "": { name: string } };
-}
-
-type Bundles = z.infer<typeof bundlesValidator>;
-type Bundle = Bundles[keyof Bundles];
-
-type Version = `${number}.${number}.${number}`;
-
-interface GamesConfig extends Record<string, unknown> {
-	name: string;
-	game: Record<string, number>;
-	description: string;
-	requires: {
-		version: Version;
-	};
-	triggers?: Array<Record<string, unknown>>;
-}
-
-async function makeBundle(name: string, bundle: Bundle, version: Version, baseDir: string): Promise<GamesConfig> {
-	const config: GamesConfig = {
-		name,
-		game: {},
-		description: "Generated via bundler by niyrme (github: niyrme/archipelago-configs)",
-		requires: { version },
-		triggers: [],
-	};
-
-	type ParsedGameConfig = {
-		game: string;
-		name: string;
-		triggers: Array<Record<string, unknown>>;
-	} & { [k: string]: Record<string, unknown> };
-
-	for (const { file: fileName, weight } of bundle) {
-		const file = Bun.file(path.resolve(baseDir, fileName));
-		const {
-			game: parsedGame,
-			name: parsedName,
-			triggers = [],
-			...parsed
-		}: ParsedGameConfig = yaml.parse(await file.text());
-		config.game[parsedGame] = weight;
-		config.triggers!.push(
-			{
-				option_name: "game",
-				option_result: parsedGame,
-				options: { "": { name: parsedName } },
-			} satisfies NameTrigger,
-			...triggers
-		);
-		const game = parsed[parsedGame];
-		if (!game) {
-			throw new Error(`Config ${name} is missing game config: ${parsedGame}`);
-		}
-		config[parsedGame] = game;
-	}
-
-	if (!config.triggers!.length) {
-		delete config.triggers;
-	}
-	return config;
 }
 
 async function main(): Promise<number> {
@@ -171,24 +76,14 @@ async function main(): Promise<number> {
 			const bundle = bundles[bundleName];
 			if (bundle) {
 				for (const { file: fileName } of bundle!) {
-					const file = Bun.file(path.resolve(baseDir, fileName));
-					if (!(await file.exists())) {
-						errorFn(`File ${path.basename(fileName)} does not exist`);
-					} else {
-						const stat = await file.stat();
-						if (!stat.isFile()) {
-							errorFn(`Input must be a file: ${path.basename(fileName)}`);
-						}
-					}
+					checkFile(path.resolve(baseDir, fileName), errorFn).then(() => void wg.done());
 				}
 			} else {
 				errorFn("Bundle not found");
+				wg.done();
 			}
-			wg.done();
 		} else if (option.startsWith("file:")) {
 			checkFile(path.resolve(baseDir, option.slice("file:".length)), errorFn).then(() => void wg.done());
-		} else {
-			throw new Error(`[UNREACHABLE] Invalid preset option ${option}`);
 		}
 	}
 
@@ -211,13 +106,11 @@ async function main(): Promise<number> {
 
 		if (option.startsWith("bundle:")) {
 			const bundleName = option.slice("bundle:".length);
-			const bundle = await makeBundle(bundleName, bundles[bundleName]!, options.requiredVersion as Version, baseDir);
+			const bundle = await makeBundle(bundleName, bundles[bundleName]!, options.requiredVersion, baseDir);
 			outputSink.write(yaml.stringify(bundle, { indent: 2, indentSeq: true, sortMapEntries: false }).trim());
 		} else if (option.startsWith("file:")) {
 			const file = Bun.file(path.resolve(baseDir, option.slice("file:".length)));
 			outputSink.write(await file.text().then((text) => text.trim()));
-		} else {
-			throw new Error("unreachable");
 		}
 
 		if (options.regions) outputSink.write("\n#endregion");
