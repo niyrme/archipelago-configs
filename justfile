@@ -1,7 +1,7 @@
 set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 
-[doc("1 main + 2 sides")]
-default: (bundle "default")
+default:
+	just --list
 
-bundle PRESET:
+bundle PRESET="default":
 	bun run src {{PRESET}}
