@@ -38,7 +38,7 @@ name: "niyrme-AHiT{NUMBER}"
   ChapterCostMinDifference: 3
   FinalChapterMinCost: 30
   FinalChapterMaxCost: 35
-  FinaleShuffle: false
+  FinaleShuffle: true
 
   # items
   StartWithCompassBadge: true
@@ -129,10 +129,3 @@ name: "niyrme-AHiT{NUMBER}"
           FinalChapterMinCost: 25
           FinalChapterMaxCost: 30
           *AHiTDLCNyakuza : false
-    - option_category: *AHiT
-      option_name: *AHiTEndGoal
-      option_result: *AHiTGoalRush
-      options:
-        *AHiT :
-          ActPlando:
-            &AHiTActNyakuza "Nyakuza Free Roam": *AHiTActNyakuza
