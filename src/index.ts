@@ -215,7 +215,7 @@ async function main(): Promise<number> {
 			outputSink.write(yaml.stringify(bundle, { indent: 2, indentSeq: true, sortMapEntries: false }).trim());
 		} else if (option.startsWith("file:")) {
 			const file = Bun.file(path.resolve(baseDir, option.slice("file:".length)));
-			outputFile.write(await file.text().then((text) => text.trim()));
+			outputSink.write(await file.text().then((text) => text.trim()));
 		} else {
 			throw new Error("unreachable");
 		}
