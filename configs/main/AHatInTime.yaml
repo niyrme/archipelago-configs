@@ -4,7 +4,7 @@ name: "niyrme-AHiT{NUMBER}"
 
 *AHiT :
   # game
-  progression_balancing: "random-range-middle-45-60"
+  progression_balancing: "random-range-middle-40-50"
   accessibility:
     "full": 0
     "minimal": 1
