@@ -6,8 +6,8 @@ name: "niyrme-AHiT{NUMBER}"
   # game
   progression_balancing: "random-range-middle-40-50"
   accessibility:
-    "full": 0
-    "minimal": 1
+    "full": 1
+    "minimal": 0
   death_link: true
 
   # general
