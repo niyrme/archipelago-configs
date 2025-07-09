@@ -36,3 +36,20 @@ export const configValidator = z.object({
 	bundles: bundlesValidator,
 	presets: presetsValidator,
 });
+
+type YamlExtension = "yml" | "yaml";
+
+type _Bundles = Record<string, Array<{ file: `${string}.${YamlExtension}`; weight?: number }>>;
+
+export interface Config<Bundles extends _Bundles = _Bundles> {
+	options: {
+		regions?: boolean;
+		output: `${string}.${YamlExtension}`;
+		basePath?: string;
+		requiredVersion: Version;
+	};
+	bundles: Bundles;
+	presets: Record<string, Array<`bundle:${Extract<keyof Bundles, string>}` | `file:${string}.${YamlExtension}`>>;
+}
+
+export const buildConfig = <B extends _Bundles>(config: Config<B>): Config<B> => config;

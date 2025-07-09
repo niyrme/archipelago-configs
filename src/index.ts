@@ -2,7 +2,7 @@ import * as yaml from "@eemeli/yaml";
 import WaitGroup from "@niyrme/wait-group";
 import path from "node:path";
 import { makeBundle } from "./lib/bundle";
-import { configValidator } from "./lib/config";
+import { configValidator, type Config } from "./lib/config";
 import { getTaggedLabeledErrorFunctionContext, type getLabeledErrorFunction } from "./lib/labeled-error-function";
 import { prettyZodError } from "./lib/zod";
 
@@ -21,13 +21,23 @@ async function checkFile(filePath: string, error: ReturnType<typeof getLabeledEr
 }
 
 async function main(): Promise<number> {
-	const configFile = Bun.file("config.json");
+	let config: any = null;
 
-	if (!(await configFile.exists())) {
-		throw new Error("config file not found");
+	const rawConfig = await import("../config").then(
+		(cfg) => cfg.default as Config,
+		() => null
+	);
+	if (rawConfig !== null) {
+		config = rawConfig;
+	} else {
+		const configFile = Bun.file("config.json");
+
+		if (!(await configFile.exists())) {
+			throw new Error("config file not found");
+		}
+
+		config = await configFile.json();
 	}
-
-	const config = await configFile.json();
 
 	const result = configValidator.safeParse(config);
 
