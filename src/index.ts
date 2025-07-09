@@ -114,7 +114,6 @@ async function main(): Promise<number> {
 			Bun.stdout.write(`\tAdding bundle: "${bundleName}"\n`);
 			const bundle = await makeBundle(bundleName, bundles[bundleName]!, options.requiredVersion, baseDir, {
 				"preset-name": presetName,
-				"bundle-name": bundleName,
 			});
 			outputSink.write(yaml.stringify(bundle, { indent: 2, indentSeq: true, sortMapEntries: false }).trim());
 		} else if (option.startsWith(OptionPrefix.File)) {

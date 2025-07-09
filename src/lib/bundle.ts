@@ -10,7 +10,6 @@ export type Version = `${number}.${number}.${number}`;
 
 export interface BundleInfo extends Record<string, unknown> {
 	"preset-name": string;
-	"bundle-name": string;
 }
 
 export interface GamesConfig extends Record<string, unknown> {
