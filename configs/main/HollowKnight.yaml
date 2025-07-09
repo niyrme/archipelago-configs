@@ -22,8 +22,8 @@ name: "niyrme-HK{NUMBER}"
   RandomizeJunkPitChests: true
   RandomizeRancidEggs: true
   RandomizeRelics: true
-  RandomizeWhisperingRoots: false
-  RandomizeBossEssence: false
+  RandomizeWhisperingRoots: true
+  RandomizeBossEssence: true
   RandomizeGrubs: true
   RandomizeMimics: false
   RandomizeMaps: true
