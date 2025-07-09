@@ -21,23 +21,18 @@ async function checkFile(filePath: string, error: ReturnType<typeof getLabeledEr
 }
 
 async function main(): Promise<number> {
-	let config: any = null;
+	const config = await import("../config").then<Config, Config>(
+		(cfg) => cfg.default,
+		async () => {
+			const configFile = Bun.file("config.json");
 
-	const rawConfig = await import("../config").then(
-		(cfg) => cfg.default as Config,
-		() => null
-	);
-	if (rawConfig !== null) {
-		config = rawConfig;
-	} else {
-		const configFile = Bun.file("config.json");
+			if (!(await configFile.exists())) {
+				throw new Error("config file not found\n");
+			}
 
-		if (!(await configFile.exists())) {
-			throw new Error("config file not found");
+			return configFile.json();
 		}
-
-		config = await configFile.json();
-	}
+	);
 
 	const result = configValidator.safeParse(config);
 
@@ -53,7 +48,7 @@ async function main(): Promise<number> {
 	switch (arg) {
 		case "-l":
 		case "--list":
-			console.log(
+			Bun.stdout.write(
 				`Available presets:\n${Object.keys(presets)
 					.map((name) => `\t${name}`)
 					.join("\n")}\n`
@@ -66,15 +61,13 @@ async function main(): Promise<number> {
 	const presetOptions = presets[presetName];
 
 	if (!presetOptions) {
-		console.error(`Preset "${presetName}" does not exist`);
+		Bun.stderr.write(`Preset "${presetName}" does not exist\n`);
 		return 1;
 	}
 
 	const baseDir = path.resolve(options.basePath);
 
 	const errorCtx = getTaggedLabeledErrorFunctionContext();
-
-	errorCtx.getLabeledErrorFunction;
 
 	const wg = new WaitGroup(16);
 
@@ -103,6 +96,8 @@ async function main(): Promise<number> {
 		return 1;
 	}
 
+	Bun.stdout.write(`Using preset: "${presetName}"\n`);
+
 	const outputFile = Bun.file(options.output ?? "bundled.yaml");
 	if (await outputFile.exists()) {
 		await outputFile.delete();
@@ -110,16 +105,22 @@ async function main(): Promise<number> {
 
 	const outputSink = outputFile.writer();
 
-	for (const [idx, option] of presetOptions.entries()) {
-		if (idx) outputSink.write("\n\n---\n\n");
+	for (const [index, option] of presetOptions.entries()) {
+		if (index) outputSink.write("\n\n---\n\n");
 		if (options.regions) outputSink.write("#region\n");
 
-		if (option.startsWith("bundle:")) {
-			const bundleName = option.slice("bundle:".length);
-			const bundle = await makeBundle(bundleName, bundles[bundleName]!, options.requiredVersion, baseDir);
+		if (option.startsWith(OptionPrefix.Bundle)) {
+			const bundleName = option.slice(OptionPrefix.Bundle.length);
+			Bun.stdout.write(`\tAdding bundle: "${bundleName}"\n`);
+			const bundle = await makeBundle(bundleName, bundles[bundleName]!, options.requiredVersion, baseDir, {
+				"preset-name": presetName,
+				"bundle-name": bundleName,
+			});
 			outputSink.write(yaml.stringify(bundle, { indent: 2, indentSeq: true, sortMapEntries: false }).trim());
-		} else if (option.startsWith("file:")) {
-			const file = Bun.file(path.resolve(baseDir, option.slice("file:".length)));
+		} else if (option.startsWith(OptionPrefix.File)) {
+			const fileName = option.slice(OptionPrefix.File.length);
+			Bun.stdout.write(`\tAdding file: "${fileName}"\n`);
+			const file = Bun.file(path.resolve(baseDir, fileName));
 			outputSink.write(await file.text().then((text) => text.trim()));
 		}
 
@@ -129,7 +130,14 @@ async function main(): Promise<number> {
 	outputSink.write("\n");
 	await outputSink.end();
 
+	Bun.stdout.write("Done!\n");
+
 	return 0;
+}
+
+const enum OptionPrefix {
+	Bundle = "bundle:",
+	File = "file:",
 }
 
 process.exit(await main());

@@ -8,6 +8,11 @@ export type Bundle = Bundles[keyof Bundles];
 
 export type Version = `${number}.${number}.${number}`;
 
+export interface BundleInfo extends Record<string, unknown> {
+	"preset-name": string;
+	"bundle-name": string;
+}
+
 export interface GamesConfig extends Record<string, unknown> {
 	name: string;
 	game: Record<string, number>;
@@ -17,6 +22,7 @@ export interface GamesConfig extends Record<string, unknown> {
 		plando?: string;
 	};
 	triggers?: Array<Record<string, unknown>>;
+	"x-bundleinfo": BundleInfo;
 }
 
 namespace Triggers {
@@ -33,7 +39,8 @@ export async function makeBundle(
 	name: string,
 	bundle: Bundle,
 	version: Version,
-	baseDir: string
+	baseDir: string,
+	bundleInfo: BundleInfo
 ): Promise<GamesConfig> {
 	const config: GamesConfig = {
 		name,
@@ -41,6 +48,7 @@ export async function makeBundle(
 		description: "Generated via bundler by niyrme (github: niyrme/archipelago-configs)",
 		requires: { version },
 		triggers: [],
+		"x-bundleinfo": bundleInfo,
 	};
 
 	const plandoRequires = new Set<string>();
@@ -70,7 +78,7 @@ export async function makeBundle(
 		if (requiredPlando?.length) {
 			for (const value of requiredPlando) {
 				if (!validPlandoRequires.has(value)) {
-					console.warn(`invalid plando option ${value}`);
+					Bun.stderr.write(`invalid plando option ${value}\n`);
 				}
 				plandoRequires.add(value);
 			}

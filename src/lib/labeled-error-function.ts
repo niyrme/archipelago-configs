@@ -1,25 +1,21 @@
-export function getLabeledErrorFunction(
-	label: string,
-	onError?: (label: string, msg: string) => void,
-	sink: NodeJS.WriteStream = process.stderr
-) {
+export function getLabeledErrorFunction(label: string, onError?: (label: string, msg: string) => void) {
 	let didWriteLabel = false;
 	return function (msg: string) {
 		if (!didWriteLabel) {
-			sink.write(`${label.trimEnd()}\n`);
+			Bun.stderr.write(`${label.trimEnd()}\n`);
 			didWriteLabel = true;
 		}
-		sink.write(`\t${msg.trimEnd()}\n`);
+		Bun.stderr.write(`\t${msg.trimEnd()}\n`);
 		onError?.(label, msg);
 	};
 }
 
-export function getTaggedLabeledErrorFunctionContext(sink?: NodeJS.WriteStream) {
+export function getTaggedLabeledErrorFunctionContext() {
 	let didError = false;
 
 	return {
 		getLabeledErrorFunction(label: string, onError?: (label: string, msg: string) => void) {
-			return getLabeledErrorFunction(label, (...args) => void ((didError = true), onError?.(...args)), sink);
+			return getLabeledErrorFunction(label, (...args) => void ((didError = true), onError?.(...args)));
 		},
 		get didError() {
 			return didError;
