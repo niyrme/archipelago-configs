@@ -99,6 +99,9 @@ name: "niyrme-AHiT{NUMBER}"
     - "Umbrella"
   start_inventory:
     "Sprint Hat": 1
+  # start_inventory_from_pool:
+  #   "Sprint Hat": 1
+  #   "Random Cosmetic": 73  # all of them
   exclude_locations:
     - "Queen Vanessa's Manor - Bedroom Chest"
     - "Queen Vanessa's Manor - Hall Chest"
