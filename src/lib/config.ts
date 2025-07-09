@@ -39,16 +39,40 @@ export const configValidator = z.object({
 
 type YamlExtension = "yml" | "yaml";
 
-type _Bundles = Record<string, Array<{ file: `${string}.${YamlExtension}`; weight?: number }>>;
+type _Bundles = Record<
+	string,
+	Array<{
+		/** Path of file added to bundle. Name must end with `.yml`/`.yaml` */
+		file: `${string}.${YamlExtension}`;
+		/**
+		 * The weight of this file being selected by the generator.
+		 * @default 1
+		 */
+		weight?: number;
+	}>
+>;
 
 export interface Config<Bundles extends _Bundles = _Bundles> {
+	/** global options */
 	options: {
+		/**
+		 * Add `#region` and `#endregion` for folding for supported editors.
+		 * @default false
+		 */
 		regions?: boolean;
-		output: `${string}.${YamlExtension}`;
+		/**
+		 * Output file name. Directory structure must exist before running, as it is not created on demand.
+		 * @default "bundled.yaml"
+		 */
+		output?: `${string}.${YamlExtension}`;
+		/** Base path used to resolve files. Defaults to current directory. */
 		basePath?: string;
+		/** Minimum required archipelago version */
 		requiredVersion: Version;
 	};
+	/** individual bundles */
 	bundles: Bundles;
+	/** presets */
 	presets: Record<string, Array<`bundle:${Extract<keyof Bundles, string>}` | `file:${string}.${YamlExtension}`>>;
 }
 
