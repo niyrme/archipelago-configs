@@ -13,6 +13,5 @@ export default buildConfig({
 	presets: {
 		default: ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}", "bundle:NiyrmeSide{number}"],
 		short: ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}"],
-		testing: ["file:main/HollowKnight.yaml", "bundle:NiyrmeSide{number}"],
 	},
 });
