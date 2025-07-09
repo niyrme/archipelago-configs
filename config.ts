@@ -7,7 +7,7 @@ export default buildConfig({
 		requiredVersion: "0.6.1",
 	},
 	bundles: {
-		"NiyrmeMain{NUMBER}": [{ file: "main/AHatInTime.yaml" }],
+		"NiyrmeMain{NUMBER}": [{ file: "main/AHatInTime.yaml", weight: 4 }, { file: "main/HollowKnight.yaml" }],
 		"NiyrmeSide{number}": [{ file: "side/Jigsaw.yaml" }, { file: "side/Yacht.yaml" }],
 	},
 	presets: {
