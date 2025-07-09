@@ -4,7 +4,7 @@ name: "niyrme-HK{NUMBER}"
 
 *HollowKnight :
   # game
-  progression_balancing: "random-range-low-50-55"
+  progression_balancing: 0
   accessibility: "full"
 
   # randomization
