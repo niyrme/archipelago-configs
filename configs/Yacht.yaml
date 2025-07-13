@@ -2,10 +2,13 @@ game: &YachtDice "Yacht Dice"
 
 name: "niyrme-yacht{number}"
 
+requires:
+  version: 0.6.2
+
 *YachtDice :
   # game
   progression_balancing: "random-range-middle-30-50"
-  accessibility: "full"
+  accessibility: "minimal"
   game_difficulty: "hard"
   score_for_last_check: 1000
   &YachtGoalScore score_for_goal: "random-range-low-777-999"

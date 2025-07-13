@@ -2,6 +2,9 @@ game: &HollowKnight "Hollow Knight"
 
 name: "niyrme-HK{NUMBER}"
 
+requires:
+  version: 0.6.2
+
 *HollowKnight :
   # game
   progression_balancing: 0

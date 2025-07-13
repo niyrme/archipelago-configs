@@ -4,7 +4,7 @@ export default buildConfig({
 	options: {
 		basePath: "configs",
 		output: ".ignore/Niyrme.yaml",
-		requiredVersion: "0.6.1",
+		requiredVersion: "0.6.2",
 	},
 	bundles: {
 		"NiyrmeMain{NUMBER}": [{ file: "AHatInTime.yaml", weight: 4 }, { file: "HollowKnight.yaml" }],

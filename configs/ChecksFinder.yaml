@@ -2,7 +2,10 @@ game: &ChecksFinder "ChecksFinder"
 
 name: "niyrme-mines{number}"
 
+requires:
+  version: 0.6.2
+
 *ChecksFinder :
   # game
-  progression_balancing: "random-range-high-45-55"
+  progression_balancing: "random-range-low-15-30"
   accessibility: "full"
