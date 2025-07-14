@@ -31,7 +31,7 @@ async function main(): Promise<number> {
 			}
 
 			return configFile.json();
-		}
+		},
 	);
 
 	const result = configValidator.safeParse(config);
@@ -51,7 +51,7 @@ async function main(): Promise<number> {
 			Bun.stdout.write(
 				`Available presets:\n${Object.keys(presets)
 					.map((name) => `\t${name}`)
-					.join("\n")}\n`
+					.join("\n")}\n`,
 			);
 			return 0;
 	}
@@ -77,7 +77,7 @@ async function main(): Promise<number> {
 			const bundleName = option.slice("bundle:".length);
 			const bundle = bundles[bundleName];
 			if (bundle) {
-				for (const { file: fileName } of bundle!) {
+				for (const { file: fileName } of bundle) {
 					checkFile(path.resolve(baseDir, fileName)).then((success) => {
 						didError ||= !success;
 						wg.done();

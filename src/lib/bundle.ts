@@ -40,7 +40,7 @@ export async function makeBundle(
 	bundle: Bundle,
 	version: Version,
 	baseDir: string,
-	bundleInfo: BundleInfo
+	bundleInfo: BundleInfo,
 ): Promise<GamesConfig> {
 	const config: GamesConfig = {
 		name,
@@ -79,7 +79,7 @@ export async function makeBundle(
 				option_result: parsed.game,
 				options: { "": { name: parsed.name } },
 			} satisfies Triggers.Name,
-			...(parsed.triggers ?? [])
+			...(parsed.triggers ?? []),
 		);
 		const requiredPlando = parsed.requires?.plando?.split(",").map((s) => s.trim());
 		if (requiredPlando?.length) {
