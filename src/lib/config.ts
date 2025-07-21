@@ -17,9 +17,9 @@ export const bundlesValidator = z.record(
 			z.object({
 				file: z.string(),
 				weight: z._default(z.optional(z.int()), 1).check(z.minimum(1, "weight must be at least 1")),
-			})
+			}),
 		)
-		.check(z.minLength(1, "At least one file is required per bundle"))
+		.check(z.minLength(1, "At least one file is required per bundle")),
 );
 
 const presetRegex = /^(bundle|file):(.+)$/;
@@ -28,7 +28,7 @@ export const presetsValidator = z.record(
 	z.string(),
 	z
 		.array(z.custom<`bundle:${string}` | `file:${string}`>((v) => typeof v === "string" && presetRegex.test(v)))
-		.check(z.minLength(1, "At least one input file or bundle is required per preset"))
+		.check(z.minLength(1, "At least one input file or bundle is required per preset")),
 );
 
 export const configValidator = z.object({

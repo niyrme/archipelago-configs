@@ -2,6 +2,7 @@ import * as yaml from "@eemeli/yaml";
 import path from "node:path";
 import type * as z from "zod/v4-mini";
 import type { bundlesValidator } from "./config";
+import logger from "./logging";
 
 export type Bundles = z.infer<typeof bundlesValidator>;
 export type Bundle = Bundles[keyof Bundles];
@@ -39,7 +40,7 @@ export async function makeBundle(
 	bundle: Bundle,
 	version: Version,
 	baseDir: string,
-	bundleInfo: BundleInfo
+	bundleInfo: BundleInfo,
 ): Promise<GamesConfig> {
 	const config: GamesConfig = {
 		name,
@@ -55,6 +56,7 @@ export async function makeBundle(
 	type ParsedGameConfig = {
 		game: string;
 		requires?: {
+			version?: Version;
 			plando?: string;
 		};
 		name: string;
@@ -64,6 +66,12 @@ export async function makeBundle(
 	for (const { file: fileName, weight } of bundle) {
 		const file = Bun.file(path.resolve(baseDir, fileName));
 		const parsed: ParsedGameConfig = yaml.parse(await file.text());
+		if (!parsed.requires?.version) {
+			logger.warn(`Config ${name} does not have a version requires set.`);
+		}
+		if (parsed.requires?.version && parsed.requires.version !== version) {
+			throw `Config version mismatch (${name}): Global requries ${version}, but yaml has ${parsed.requires.version}`;
+		}
 		config.game[parsed.game] = weight;
 		config.triggers!.push(
 			{
@@ -71,20 +79,20 @@ export async function makeBundle(
 				option_result: parsed.game,
 				options: { "": { name: parsed.name } },
 			} satisfies Triggers.Name,
-			...(parsed.triggers ?? [])
+			...(parsed.triggers ?? []),
 		);
 		const requiredPlando = parsed.requires?.plando?.split(",").map((s) => s.trim());
 		if (requiredPlando?.length) {
 			for (const value of requiredPlando) {
 				if (!validPlandoRequires.has(value)) {
-					Bun.stderr.write(`invalid plando option ${value}\n`);
+					logger.warn(`invalid plando option ${value}`);
 				}
 				plandoRequires.add(value);
 			}
 		}
 		const game = parsed[parsed.game];
 		if (!game) {
-			throw new Error(`Config ${name} is missing game config: ${parsed.game}`);
+			throw `Config ${name} is missing game config: ${parsed.game}`;
 		}
 		if (plandoRequires.size) {
 			config.requires.plando = Array.from(plandoRequires.values()).join(", ");

@@ -3,18 +3,18 @@ import WaitGroup from "@niyrme/wait-group";
 import path from "node:path";
 import { makeBundle } from "./lib/bundle";
 import { configValidator, type Config } from "./lib/config";
-import { getTaggedLabeledErrorFunctionContext, type getLabeledErrorFunction } from "./lib/labeled-error-function";
+import logger from "./lib/logging";
 import { prettyZodError } from "./lib/zod";
 
-async function checkFile(filePath: string, error: ReturnType<typeof getLabeledErrorFunction>): Promise<boolean> {
+async function checkFile(filePath: string): Promise<boolean> {
 	const file = Bun.file(path.resolve(filePath));
 	if (!(await file.exists())) {
-		error(`File ${filePath} does not exist`);
+		logger.error(`File ${filePath} does not exist`);
 		return false;
 	}
 	const stat = await file.stat();
 	if (!stat.isFile()) {
-		error(`Input is not a file: ${filePath}`);
+		logger.error(`Input is not a file: ${filePath}`);
 		return false;
 	}
 	return true;
@@ -27,11 +27,11 @@ async function main(): Promise<number> {
 			const configFile = Bun.file("config.json");
 
 			if (!(await configFile.exists())) {
-				throw new Error("config file not found\n");
+				throw new Error("config file not found");
 			}
 
 			return configFile.json();
-		}
+		},
 	);
 
 	const result = configValidator.safeParse(config);
@@ -51,7 +51,7 @@ async function main(): Promise<number> {
 			Bun.stdout.write(
 				`Available presets:\n${Object.keys(presets)
 					.map((name) => `\t${name}`)
-					.join("\n")}\n`
+					.join("\n")}\n`,
 			);
 			return 0;
 	}
@@ -61,42 +61,47 @@ async function main(): Promise<number> {
 	const presetOptions = presets[presetName];
 
 	if (!presetOptions) {
-		Bun.stderr.write(`Preset "${presetName}" does not exist\n`);
+		logger.error(`Preset "${presetName}" does not exist`);
 		return 1;
 	}
 
 	const baseDir = path.resolve(options.basePath);
 
-	const errorCtx = getTaggedLabeledErrorFunctionContext();
-
 	const wg = new WaitGroup(16);
+
+	let didError = false;
 
 	for (const option of presetOptions) {
 		await wg.add();
-		const errorFn = errorCtx.getLabeledErrorFunction(`"${option}"`);
 		if (option.startsWith("bundle:")) {
 			const bundleName = option.slice("bundle:".length);
 			const bundle = bundles[bundleName];
 			if (bundle) {
-				for (const { file: fileName } of bundle!) {
-					checkFile(path.resolve(baseDir, fileName), errorFn).then(() => void wg.done());
+				for (const { file: fileName } of bundle) {
+					checkFile(path.resolve(baseDir, fileName)).then((success) => {
+						didError ||= !success;
+						wg.done();
+					});
 				}
 			} else {
-				errorFn("Bundle not found");
+				logger.error(`[${option}] Bundle not found`);
 				wg.done();
 			}
 		} else if (option.startsWith("file:")) {
-			checkFile(path.resolve(baseDir, option.slice("file:".length)), errorFn).then(() => void wg.done());
+			checkFile(path.resolve(baseDir, option.slice("file:".length))).then((success) => {
+				didError ||= !success;
+				wg.done();
+			});
 		}
 	}
 
 	await wg.waitAll();
 
-	if (errorCtx.didError) {
+	if (didError) {
 		return 1;
 	}
 
-	Bun.stdout.write(`Using preset: "${presetName}"\n`);
+	logger.info(`Using preset: "${presetName}"`);
 
 	const outputFile = Bun.file(options.output ?? "bundled.yaml");
 	if (await outputFile.exists()) {
@@ -105,20 +110,32 @@ async function main(): Promise<number> {
 
 	const outputSink = outputFile.writer();
 
+	let didSinkError = false;
+
 	for (const [index, option] of presetOptions.entries()) {
 		if (index) outputSink.write("\n\n---\n\n");
 		if (options.regions) outputSink.write("#region\n");
 
 		if (option.startsWith(OptionPrefix.Bundle)) {
 			const bundleName = option.slice(OptionPrefix.Bundle.length);
-			Bun.stdout.write(`\tAdding bundle: "${bundleName}"\n`);
+			logger.info(`Adding bundle: "${bundleName}"`);
 			const bundle = await makeBundle(bundleName, bundles[bundleName]!, options.requiredVersion, baseDir, {
 				"preset-name": presetName,
+			}).catch((error) => {
+				if (typeof error === "string") {
+					logger.error(error);
+					didSinkError = true;
+					return null;
+				} else {
+					throw error;
+				}
 			});
-			outputSink.write(yaml.stringify(bundle, { indent: 2, indentSeq: true, sortMapEntries: false }).trim());
+			if (bundle !== null) {
+				outputSink.write(yaml.stringify(bundle, { indent: 2, indentSeq: true, sortMapEntries: false }).trim());
+			}
 		} else if (option.startsWith(OptionPrefix.File)) {
 			const fileName = option.slice(OptionPrefix.File.length);
-			Bun.stdout.write(`\tAdding file: "${fileName}"\n`);
+			logger.info(`Adding file: "${fileName}"`);
 			const file = Bun.file(path.resolve(baseDir, fileName));
 			outputSink.write(await file.text().then((text) => text.trim()));
 		}
@@ -129,9 +146,13 @@ async function main(): Promise<number> {
 	outputSink.write("\n");
 	await outputSink.end();
 
-	Bun.stdout.write("Done!\n");
-
-	return 0;
+	if (didSinkError) {
+		await outputFile.delete();
+		return 1;
+	} else {
+		logger.info("Done!");
+		return 0;
+	}
 }
 
 const enum OptionPrefix {

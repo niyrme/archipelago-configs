@@ -1,12 +1,11 @@
 {
 	"emmet.showAbbreviationSuggestions": false,
+	"editor.formatOnPaste": false,
 	"[javascript]": {
-		"editor.formatOnPaste": false,
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[typescript]": {
-		"editor.formatOnPaste": false,
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}

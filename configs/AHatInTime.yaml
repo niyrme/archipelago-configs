@@ -2,6 +2,9 @@ game: &AHiT "A Hat in Time"
 
 name: "niyrme-AHiT{NUMBER}"
 
+requires:
+  version: 0.6.2
+
 *AHiT :
   # game
   progression_balancing: "random-range-middle-40-50"
@@ -25,12 +28,16 @@ name: "niyrme-AHiT{NUMBER}"
   BadgeSellerMaxItems: 8
   LogicDifficulty: "moderate"
   NoPaintingSkips: true
-  CTRLogic: "scooter"
+  CTRLogic:
+    time_stop_only: 0
+    scooter: 1
+    sprint: 0
+    nothing: 0
 
   # acts
   ActRandomizer: "insanity"
   StartingChapter: "random"
-  LowestChapterCost: "random-range-low-4-8"
+  LowestChapterCost: "random-range-low-4-7"
   HighestChapterCost: "random-range-middle-25-30"
   ChapterCostIncrement: "random-range-low-4-6"
   ChapterCostMinDifference:
@@ -44,17 +51,17 @@ name: "niyrme-AHiT{NUMBER}"
   StartWithCompassBadge: true
   CompassBadgeMode: "closest"
   RandomizeHatOrder: "time_stop_last"
-  YarnAvailable: 45
+  YarnAvailable: "random-range-middle-40-50"
   YarnCostMin: 5
   YarnCostMax: 8
-  MinExtraYarn: "random-range-5-15"
+  MinExtraYarn: "random-range-middle-5-15"
   HatItems: true
   UmbrellaLogic: true
-  MaxExtraTimePieces: "random-range-10-15"
+  MaxExtraTimePieces: "random-range-middle-8-12"
   YarnBalancePercent: 25
   TimePieceBalancePercent: "random-range-low-40-60"
 
-  # Seal the Deal DLC
+  # DLC: Seal the Deal
   EnableDLC1: false
   Tasksanity: false
   TasksanityTaskStep: 1
@@ -62,7 +69,7 @@ name: "niyrme-AHiT{NUMBER}"
   ShipShapeCustomTaskGoal: 0
   ExcludeTour: false
 
-  # Nyakuza Metro DLC
+  # DLC: Nyakuza Metro
   &AHiTDLCNyakuza EnableDLC2: true
   MetroMinPonCost: 10
   MetroMaxPonCost: 50
@@ -97,11 +104,8 @@ name: "niyrme-AHiT{NUMBER}"
     - "100 Pons"
     - "Hookshot Badge"
     - "Umbrella"
-  start_inventory:
+  start_inventory_from_pool:
     "Sprint Hat": 1
-  # start_inventory_from_pool:
-  #   "Sprint Hat": 1
-  #   "Random Cosmetic": 73  # all of them
   exclude_locations:
     - "Queen Vanessa's Manor - Bedroom Chest"
     - "Queen Vanessa's Manor - Hall Chest"
@@ -110,7 +114,6 @@ name: "niyrme-AHiT{NUMBER}"
     - "Badge Seller - Item 1"
     - "Badge Seller - Item 2"
     - "Mafia Boss Shop Item"
-    - "Snatcher's Contract - Toilet of Doom"
     # Nyakuza DLC
     - "Bluefin Tunnel Thug - Item 1"
     - "Green Clean Station Thug A - Item 1"

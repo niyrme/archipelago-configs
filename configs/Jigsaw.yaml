@@ -2,6 +2,9 @@ game: &Jigsaw "Jigsaw"
 
 name: "niyrme-puuule{number}"
 
+requires:
+  version: 0.6.2
+
 *Jigsaw :
   # game
   progression_balancing: "random-range-low-0-10"

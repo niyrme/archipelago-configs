@@ -2,6 +2,9 @@ game: &OuterWilds "Outer Wilds"
 
 name: "niyrme-OW{NUMBER}"
 
+requires:
+  version: 0.6.2
+
 *OuterWilds :
   # game
   progression_balancing: "random-range-middle-50-60"
