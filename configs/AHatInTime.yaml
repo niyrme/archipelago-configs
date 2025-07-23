@@ -39,7 +39,9 @@ requires:
   StartingChapter: "random"
   LowestChapterCost: "random-range-low-4-7"
   HighestChapterCost: "random-range-middle-25-30"
-  ChapterCostIncrement: "random-range-low-4-6"
+  ChapterCostIncrement:
+    5: 1
+    6: 1
   ChapterCostMinDifference:
     4: 1
     5: 1
