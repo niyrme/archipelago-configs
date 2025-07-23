@@ -1,0 +1,26 @@
+null:
+  progression_balancing: null
+
+Hollow Knight:
+  progression_balancing: 0
+
+Jigsaw:
+  percentage_of_extra_pieces: 10
+
+Pokemon Crystal:
+  trainersanity: false
+
+Pokemon Emerald:
+  trainersanity: false
+  dexsanity: false
+
+Pokemon FireRed and LeafGreen:
+  trainersanity: 0
+  dexsanity: 0
+
+Super Mario Land 2:
+  coinsanity: false
+
+Sonic Adventure DX:
+  ring_capsule_sanity: false
+  powerup_capsule_sanity: false
