@@ -99,7 +99,7 @@ requires:
   LaserTrapWeight: 0
   ParadeTrapWeight: 0
 
-  # item & location options
+  # plando, item & location options
   non_local_items:
     - "25 Pons"
     - "50 Pons"
@@ -111,6 +111,7 @@ requires:
   exclude_locations:
     - "Queen Vanessa's Manor - Bedroom Chest"
     - "Queen Vanessa's Manor - Hall Chest"
+    - "Act Completion (The Big Parade)"
   priority_locations:
     - "Act Completion (Award Ceremony)"
     - "Badge Seller - Item 1"
@@ -127,6 +128,9 @@ requires:
     - "Yellow Overpass Thug A - Item 1"
     - "Yellow Overpass Thug B - Item 1"
     - "Yellow Overpass Thug C - Item 1"
+
+  ActPlando:
+    "Dead Bird Studio Basement": "The Big Parade"
 
   triggers:
     - option_category: *AHiT
