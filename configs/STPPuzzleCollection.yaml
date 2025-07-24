@@ -11,9 +11,9 @@ requires:
   accessibility: "full"
 
   # puzzle optios
-  puzzle_count: "random-range-low-10-15"
+  puzzle_count: "random-range-low-15-20"
   starting_puzzles: 2
-  completion_percentage: 80
+  completion_percentage: "random-range-middle-75-85"
 
   min_difficulty:
     "easy": 1
@@ -43,22 +43,22 @@ requires:
     "loopy": 0
     "magnets": 0
     "map": 1
-    "mines": 1
+    "mines": 2
     "mosaic": 0
-    "net": 1
-    "netslide": 1
+    "net": 0
+    "netslide": 0
     "palisade": 0
-    "pattern": 2
+    "pattern": 3
     "pearl": 0
     "pegs": 0
     "range": 0
     "rect": 0
     "samegame": 0
-    "signpost": 2
+    "signpost": 3
     "singles": 0
     "sixteen": 0
     "slant": 0
-    "solo": 1
+    "solo": 2
     "tents": 0
     "towers": 0
     "tracks": 0
