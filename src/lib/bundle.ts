@@ -2,7 +2,7 @@ import * as yaml from "@eemeli/yaml";
 import path from "node:path";
 import type * as z from "zod/v4-mini";
 import type { bundlesValidator } from "./config";
-import logger from "./logging";
+import _logger from "./logging";
 
 export type Bundles = z.infer<typeof bundlesValidator>;
 export type Bundle = Bundles[keyof Bundles];
@@ -42,6 +42,7 @@ export async function makeBundle(
 	baseDir: string,
 	bundleInfo: BundleInfo,
 ): Promise<GamesConfig> {
+	const logger = _logger.child({ label: `bundle:${name}` });
 	const config: GamesConfig = {
 		name,
 		game: {},
@@ -64,8 +65,13 @@ export async function makeBundle(
 	} & { [k: string]: Record<string, unknown> };
 
 	for (const { file: fileName, weight } of bundle) {
+		if (weight === 0) {
+			logger.warn(`Skipping file with weight 0: ${fileName}`);
+			continue;
+		}
 		const file = Bun.file(path.resolve(baseDir, fileName));
 		const parsed: ParsedGameConfig = yaml.parse(await file.text());
+		logger.info(`Adding game ${parsed.game} (${parsed.name})`);
 		if (!parsed.requires?.version) {
 			logger.warn(`Config ${name} does not have a version requires set.`);
 		}
@@ -85,7 +91,7 @@ export async function makeBundle(
 		if (requiredPlando?.length) {
 			for (const value of requiredPlando) {
 				if (!validPlandoRequires.has(value)) {
-					logger.warn(`invalid plando option ${value}`);
+					logger.warn(`Invalid plando option ${value}`);
 				}
 				plandoRequires.add(value);
 			}
@@ -98,6 +104,10 @@ export async function makeBundle(
 			config.requires.plando = Array.from(plandoRequires.values()).join(", ");
 		}
 		config[parsed.game] = game;
+	}
+
+	if (Object.keys(config.game).length === 0) {
+		throw `Bundle ${name} did not resolve any games!`;
 	}
 
 	if (!config.triggers!.length) {

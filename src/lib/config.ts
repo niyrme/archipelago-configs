@@ -16,7 +16,7 @@ export const bundlesValidator = z.record(
 		.array(
 			z.object({
 				file: z.string(),
-				weight: z._default(z.optional(z.int()), 1).check(z.minimum(1, "weight must be at least 1")),
+				weight: z._default(z.optional(z.int()), 1).check(z.minimum(0, "weight must be at least 0")),
 			}),
 		)
 		.check(z.minLength(1, "At least one file is required per bundle")),
