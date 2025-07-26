@@ -7,12 +7,8 @@ export default buildConfig({
 		requiredVersion: "0.6.2",
 	},
 	bundles: {
-		"NiyrmeMain{NUMBER}": [{ file: "AHatInTime.yaml", weight: 2 }, { file: "HollowKnight.yaml" }],
-		"NiyrmeSide{number}": [
-			{ file: "Jigsaw.yaml", weight: 0 },
-			{ file: "Yacht.yaml", weight: 1 },
-			{ file: "STPPuzzleCollection.yaml", weight: 3 },
-		],
+		"NiyrmeMain{NUMBER}": [{ file: "AHatInTime.yaml" }, { file: "HollowKnight.yaml" }],
+		"NiyrmeSide{number}": [{ file: "Yacht.yaml" }, { file: "STPPuzzleCollection.yaml", weight: 3 }],
 	},
 	presets: {
 		default: ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}", "bundle:NiyrmeSide{number}"],
