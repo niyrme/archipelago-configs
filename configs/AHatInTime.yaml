@@ -141,5 +141,5 @@ requires:
           MinPonCost: 30
           MaxPonCost: 100
           FinalChapterMinCost: 25
-          FinalChapterMaxCost: 30
+          FinalChapterMaxCost: 35
           *AHiTDLCNyakuza : false
