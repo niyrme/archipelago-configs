@@ -1,0 +1,321 @@
+name: niyrme-main{NUMBER}
+
+requires:
+  version: 0.6.2
+
+x-option-presets:
+  - &OptionPresetSync "sync"
+  - &OptionPresetAsync "async"
+
+&OptionPreset "x-option.preset": *OptionPresetSync
+
+game:
+  &AHiT "A Hat in Time": 1
+  &HollowKnight "Hollow Knight": 1
+
+*AHiT :
+  # game
+  progression_balancing: "random-range-middle-40-50"
+  accessibility:
+    "full": 1
+    "minimal": 0
+  death_link: true
+
+  # general
+  &AHiT_EndGoal EndGoal:
+    &AHiT_EndGoal_Finale finale: 7
+    &AHiT_EndGoal_Rush rush_hour: 0 # 3
+    &AHiT_EndGoal_Seal seal_the_deal: 0
+  ShuffleStorybookPages: true
+  ShuffleAlpineZiplines: true
+  ShuffleSubconPaintings: true
+  ShuffleActContracts: true
+  MinPonCost: 20
+  MaxPonCost: 80
+  BadgeSellerMinItems: 5
+  BadgeSellerMaxItems: 8
+  LogicDifficulty: "moderate"
+  NoPaintingSkips: true
+  CTRLogic:
+    time_stop_only: 0
+    scooter: 1
+    sprint: 0
+    nothing: 0
+
+  # acts
+  ActRandomizer: "insanity"
+  StartingChapter: "random"
+  LowestChapterCost: "random-range-low-4-7"
+  HighestChapterCost: "random-range-middle-25-30"
+  ChapterCostIncrement:
+    5: 1
+    6: 1
+  ChapterCostMinDifference:
+    4: 1
+    5: 1
+  &AHiT_GoalMinCost FinalChapterMinCost: 30
+  &AHiT_GoalMaxCost FinalChapterMaxCost: 35
+  FinaleShuffle: true
+
+  # items
+  StartWithCompassBadge: true
+  CompassBadgeMode: "closest"
+  RandomizeHatOrder: "time_stop_last"
+  YarnAvailable: "random-range-middle-40-50"
+  YarnCostMin: 5
+  YarnCostMax: 8
+  MinExtraYarn: "random-range-middle-5-15"
+  HatItems: true
+  UmbrellaLogic: true
+  MaxExtraTimePieces: "random-range-middle-8-12"
+  YarnBalancePercent: 25
+  TimePieceBalancePercent: "random-range-low-40-60"
+
+  # DLC: Seal the Deal
+  EnableDLC1: false
+  Tasksanity: false
+  TasksanityTaskStep: 1
+  TasksanityCheckCount: 18
+  ShipShapeCustomTaskGoal: 0
+  ExcludeTour: false
+
+  # DLC: Nyakuza Metro
+  &AHiT_DLCNyakuza EnableDLC2: true
+  MetroMinPonCost: 10
+  MetroMaxPonCost: 50
+  NyakuzaThugMinShopItems: 1
+  NyakuzaThugMaxShopItems: 4
+  BaseballBat: true
+  NoTicketSkips: "rush_hour"
+
+  # Death Wish
+  EnableDeathWish: false
+  DWTimePieceRequirement: 15
+  DWShuffle: false
+  DWShuffleCountMin: 18
+  DWShuffleCountMax: 25
+  DWEnableBonus: false
+  DWAutoCompleteBonuses: true
+  DWExcludeAnnoyingContracts: true
+  DWExcludeAnnoyingBonuses: true
+  DWExcludeCandles: true
+  DeathWishOnly: false
+
+  # traps
+  TrapChance: 0
+  BabyTrapWeight: 0
+  LaserTrapWeight: 0
+  ParadeTrapWeight: 0
+
+  # plando, item & location options
+  non_local_items:
+    - "Hookshot Badge"
+    - "Umbrella"
+    - "Dweller Mask"
+  start_inventory_from_pool:
+    "Sprint Hat": 1
+  exclude_locations:
+    - "Queen Vanessa's Manor - Bedroom Chest"
+    - "Queen Vanessa's Manor - Hall Chest"
+    - &Location_AHiT_ActCompletionTheBigParade "Act Completion (The Big Parade)"
+  priority_locations:
+    - "Act Completion (Award Ceremony)"
+    - "Badge Seller - Item 1"
+    - "Badge Seller - Item 2"
+    - "Mafia Boss Shop Item"
+    # Nyakuza DLC
+    - "Bluefin Tunnel Thug - Item 1"
+    - "Green Clean Station Thug A - Item 1"
+    - "Green Clean Station Thug B - Item 1"
+    - "Main Station Thug A - Item 1"
+    - "Main Station Thug B - Item 1"
+    - "Main Station Thug C - Item 1"
+    - "Pink Paw Station Thug - Item 1"
+    - "Yellow Overpass Thug A - Item 1"
+    - "Yellow Overpass Thug B - Item 1"
+    - "Yellow Overpass Thug C - Item 1"
+
+  ActPlando:
+    "Dead Bird Studio Basement": "The Big Parade"
+
+*HollowKnight :
+  # game
+  progression_balancing: 0
+  accessibility: "full"
+
+  # randomization
+  RandomizeDreamers: true
+  RandomizeSkills: true
+  RandomizeFocus: false
+  RandomizeSwim: true
+  RandomizeCharms: true
+  RandomizeKeys: true
+  RandomizeMaskShards: true
+  RandomizeVesselFragments: true
+  RandomizeCharmNotches: true
+  RandomizePaleOre: true
+  RandomizeGeoChests: false
+  RandomizeJunkPitChests: true
+  RandomizeRancidEggs: true
+  RandomizeRelics: true
+  RandomizeWhisperingRoots: true
+  RandomizeBossEssence: true
+  RandomizeGrubs: true
+  RandomizeMimics: false
+  RandomizeMaps: true
+  RandomizeStags: false
+  RandomizeLifebloodCocoons: true
+  RandomizeGrimmkinFlames: true
+  RandomizeJournalEntries: false
+  RandomizeNail: false
+  RandomizeGeoRocks: false
+  RandomizeBossGeo: true
+  RandomizeSoulTotems: false
+  RandomizeLoreTablets: false
+  RandomizeElevatorPass: true
+
+  # skips
+  PreciseMovement: false
+  ProficientCombat: false
+  BackgroundObjectPogos: false
+  EnemyPogos: false
+  ObscureSkips: false
+  ShadeSkips: false
+  InfectionSkips: false
+  FireballSkips: false
+  SpikeTunnels: false
+  AcidSkips: false
+  DamageBoosts: false
+  DangerousSkips: false
+  DarkRooms: false
+  ComplexSkips: false
+  DifficultSkips: false
+
+  RemoveSpellUpgrades: false
+  StartLocation:
+    "king's_pass": 1
+  Goal:
+    any: 0
+    hollowknight: 0
+    siblings: 1
+    &HK_Goal_Radiance radiance: 0
+    godhome: 0
+    godhome_flower: 0
+    grub_hunt: 0
+  GrubHuntGoal: "random-high"
+  WhitePalace:
+    exclude: 0
+    kingfragment: 0
+    nopathofpain: 1
+    include: 0
+  ExtraPlatforms: true
+  AddUnshuffledLocations: false
+  StartingGeo: "random-range-low-0-100"
+
+  # deathlink
+  DeathLink: false
+  DeathLinkShade:
+    vanilla: 0
+    shadeless: 0
+    shade: 1
+  DeathLinkBreaksFragileCharms: false
+
+  # shops
+  MinimumGeoPrice: 1
+  MaximumGeoPrice: "random-range-middle-400-600"
+  MinimumGrubPrice: 1
+  MaximumGrubPrice: "random-range-middle-20-30"
+  MinimumEssencePrice: 1
+  MaximumEssencePrice: "random-range-middle-1200-1800"
+  MinimumCharmPrice: 1
+  MaximumCharmPrice: "random-range-low-20-30"
+  RandomCharmCosts: "random-range-middle-75-105"
+  MinimumEggPrice: 1
+  MaximumEggPrice: "random-range-middle-8-12"
+  EggShopSlots: "random-range-low-2-6"
+  SlyShopSlots: "random-range-middle-6-12"
+  SlyKeyShopSlots: "random-range-middle-4-8"
+  IseldaShopSlots: "random-range-middle-3-6"
+  SalubraShopSlots: "random-range-low-4-7"
+  SalubraCharmShopSlots: "random-range-low-4-7"
+  LegEaterShopSlots: "random-range-low-3-5"
+  GrubfatherRewardSlots: "random-range-middle-5-10"
+  SeerRewardSlots: "random-range-low-7-10"
+  ExtraShopSlots: "random-range-low-0-4"
+
+  # cursed abilities
+  SplitCrystalHeart: false
+  SplitMothwingCloak: false
+  SplitMantisClaw: false
+
+  # costsanity
+  CostSanity:
+    "off": 1
+    "on": 0
+    "shopsonly": 0
+    "notshops": 0
+  CostSanityHybridChance: "random-range-middle-5-10"
+  CostSanityEggWeight: 0
+  CostSanityGrubWeight: 0
+  CostSanityEssenceWeight: 0
+  CostSanityCharmWeight: 0
+  CostSanityGeoWeight: 0
+
+  # plando
+  exclude_locations:
+    - "Mask_Shard-Grey_Mourner"  # skill issue lmao
+
+triggers:
+  # names
+  - option_name: game
+    option_result: *AHiT
+    options: { "": { "name": "niyrme-AHiT{NUMBER}" } }
+  - option_name: game
+    option_result: *HollowKnight
+    options: { "": { "name": "niyrme-HK{NUMBER}" } }
+
+  # sync
+  - option_name: *OptionPreset
+    option_result: *OptionPresetSync
+    options:
+      *AHiT :
+        +triggers:
+          - option_category: *AHiT
+            option_name: *AHiT_EndGoal
+            option_result: *AHiT_EndGoal_Finale
+            options:
+              *AHiT :
+                MinPonCost: 30
+                MaxPonCost: 100
+                *AHiT_GoalMinCost : 25
+                *AHiT_GoalMaxCost : 35
+                *AHiT_DLCNyakuza : false
+
+  # async
+  - option_name: *OptionPreset
+    option_result: *OptionPresetAsync
+    options:
+      *AHiT :
+        progression_balancing: "random-range-low-10-30"
+        death_link: false
+        *AHiT_EndGoal :
+          *AHiT_EndGoal_Finale : 7
+          *AHiT_EndGoal_Rush : 3
+          *AHiT_EndGoal_Seal : 0
+        +non_local_items:
+          - "Brewing Hat"
+          - "Ice Hat"
+        -exclude_locations:
+          - *Location_AHiT_ActCompletionTheBigParade
+        priority_locations: []
+        ActPlando: {}
+        *AHiT_GoalMinCost : 35
+        *AHiT_GoalMaxCost : 40
+      *HollowKnight :
+        RandomizeGeoChests: true
+        RandomizeStags: true
+        RandomizeGeoRocks: true
+        RandomizeSoulTotems: true
+        RandomizeLoreTablets: true
+        Goal: *HK_Goal_Radiance
+        StartingGeo: 0
