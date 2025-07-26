@@ -210,7 +210,9 @@ game:
     include: 0
   ExtraPlatforms: true
   AddUnshuffledLocations: false
-  StartingGeo: "random-range-low-0-100"
+  StartingGeo:
+    0: 4
+    "random-range-low-1-100": 1
 
   # deathlink
   DeathLink: false
