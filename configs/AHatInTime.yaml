@@ -5,7 +5,7 @@ name: "niyrme-AHiT{NUMBER}"
 requires:
   version: 0.6.2
 
-x-strings:
+x-option-presets:
   - &OptionPresetSync "sync"
   - &OptionPresetAsync "async"
 
