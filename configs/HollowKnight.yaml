@@ -127,3 +127,7 @@ requires:
   CostSanityEssenceWeight: 0
   CostSanityCharmWeight: 0
   CostSanityGeoWeight: 0
+
+  # plando
+  exclude_locations:
+    - "Mask_Shard-Grey_Mourner"  # skill issue lmao
