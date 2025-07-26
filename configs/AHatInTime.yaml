@@ -5,6 +5,12 @@ name: "niyrme-AHiT{NUMBER}"
 requires:
   version: 0.6.2
 
+x-strings:
+  - &OptionPresetSync "sync"
+  - &OptionPresetAsync "async"
+
+&OptionPreset "x-option.preset": *OptionPresetSync
+
 *AHiT :
   # game
   progression_balancing: "random-range-middle-40-50"
@@ -111,7 +117,7 @@ requires:
   exclude_locations:
     - "Queen Vanessa's Manor - Bedroom Chest"
     - "Queen Vanessa's Manor - Hall Chest"
-    - "Act Completion (The Big Parade)"
+    - &LocationActCompletionTheBigParade "Act Completion (The Big Parade)"
   priority_locations:
     - "Act Completion (Award Ceremony)"
     - "Badge Seller - Item 1"
@@ -143,3 +149,28 @@ requires:
           FinalChapterMinCost: 25
           FinalChapterMaxCost: 35
           *AHiTDLCNyakuza : false
+
+triggers:
+  - option_name: *OptionPreset
+    option_result: *OptionPresetAsync
+    options:
+      *AHiT :
+        progression_balancing: "random-range-low-10-30"
+        accessibility:
+          "full": 2
+          "minimal": 1
+        death_link: false
+        *AHiTEndGoal :
+          *AHiTGoalFinale : 7
+          *AHiTGoalRush : 3
+          *AHiTGoalSeal : 0
+        non_local_items:
+          - "Hookshot Badge"
+          - "Umbrella"
+          - "Brewing Hat"
+          - "Ice Hat"
+          - "Dweller Mask"
+        -exclude_locations:
+          - *LocationActCompletionTheBigParade
+        priority_locations: []
+        ActPlando: {}
