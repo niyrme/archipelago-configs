@@ -5,6 +5,12 @@ name: "niyrme-HK{NUMBER}"
 requires:
   version: 0.6.2
 
+x-strings:
+  - &OptionPresetSync "sync"
+  - &OptionPresetAsync "async"
+
+&OptionPreset "x-option.preset": *OptionPresetSync
+
 *HollowKnight :
   # game
   progression_balancing: 0
@@ -65,7 +71,7 @@ requires:
     any: 0
     hollowknight: 0
     siblings: 1
-    radiance: 0
+    &GoalRadiance radiance: 0
     godhome: 0
     godhome_flower: 0
     grub_hunt: 0
@@ -131,3 +137,19 @@ requires:
   # plando
   exclude_locations:
     - "Mask_Shard-Grey_Mourner"  # skill issue lmao
+
+triggers:
+  - option_name: *OptionPreset
+    option_result: *OptionPresetAsync
+    options:
+      *HollowKnight :
+        accessibility:
+          "full": 4
+          "minimal": 1
+        RandomizeGeoChests: true
+        RandomizeStags: true
+        RandomizeGeoRocks: true
+        RandomizeSoulTotems: true
+        RandomizeLoreTablets: true
+        Goal: *GoalRadiance
+        StartingGeo: 0
