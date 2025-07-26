@@ -51,8 +51,8 @@ x-strings:
   ChapterCostMinDifference:
     4: 1
     5: 1
-  FinalChapterMinCost: 30
-  FinalChapterMaxCost: 35
+  &GoalMinCost FinalChapterMinCost: 30
+  &GoalMaxCost FinalChapterMaxCost: 35
   FinaleShuffle: true
 
   # items
@@ -107,11 +107,9 @@ x-strings:
 
   # plando, item & location options
   non_local_items:
-    - "25 Pons"
-    - "50 Pons"
-    - "100 Pons"
     - "Hookshot Badge"
     - "Umbrella"
+    - "Dweller Mask"
   start_inventory_from_pool:
     "Sprint Hat": 1
   exclude_locations:
@@ -138,19 +136,24 @@ x-strings:
   ActPlando:
     "Dead Bird Studio Basement": "The Big Parade"
 
-  triggers:
-    - option_category: *AHiT
-      option_name: *AHiTEndGoal
-      option_result: *AHiTGoalFinale
-      options:
-        *AHiT :
-          MinPonCost: 30
-          MaxPonCost: 100
-          FinalChapterMinCost: 25
-          FinalChapterMaxCost: 35
-          *AHiTDLCNyakuza : false
-
 triggers:
+  # sync
+  - option_name: *OptionPreset
+    option_result: *OptionPresetSync
+    options:
+      *AHiT :
+        +triggers:
+          - option_category: *AHiT
+            option_name: *AHiTEndGoal
+            option_result: *AHiTGoalFinale
+            options:
+              *AHiT :
+                MinPonCost: 30
+                MaxPonCost: 100
+                *GoalMinCost : 25
+                *GoalMaxCost : 35
+                *AHiTDLCNyakuza : false
+  # async
   - option_name: *OptionPreset
     option_result: *OptionPresetAsync
     options:
@@ -164,13 +167,12 @@ triggers:
           *AHiTGoalFinale : 7
           *AHiTGoalRush : 3
           *AHiTGoalSeal : 0
-        non_local_items:
-          - "Hookshot Badge"
-          - "Umbrella"
+        +non_local_items:
           - "Brewing Hat"
           - "Ice Hat"
-          - "Dweller Mask"
         -exclude_locations:
           - *LocationActCompletionTheBigParade
         priority_locations: []
         ActPlando: {}
+        *GoalMinCost : 35
+        *GoalMaxCost : 40
