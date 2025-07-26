@@ -71,7 +71,7 @@ export async function makeBundle(
 		}
 		const file = Bun.file(path.resolve(baseDir, fileName));
 		const parsed: ParsedGameConfig = yaml.parse(await file.text());
-		logger.info(`Adding game ${parsed.game} (${parsed.name})`);
+		logger.info(`Adding game ${parsed.game} (${parsed.name}; weight ${weight})`);
 		if (!parsed.requires?.version) {
 			logger.warn(`Config ${name} does not have a version requires set.`);
 		}
