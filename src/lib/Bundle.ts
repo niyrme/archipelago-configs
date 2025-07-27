@@ -69,6 +69,7 @@ export class Bundle {
 			this.logger.error(`Game ${game} not found`);
 			return;
 		}
+		this.logger.info(`Adding game ${game} (${parsedGameConfig.name}; weight: ${weight})`);
 		if (this.games.has(game)) {
 			this.logger.warn(`Adding duplicate game: ${game}`);
 		}
