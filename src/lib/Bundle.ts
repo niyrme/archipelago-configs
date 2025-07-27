@@ -75,6 +75,7 @@ export class Bundle {
 		}
 		if (!weight) {
 			this.logger.warn(`Skipping game with weight 0: ${game}`);
+			return;
 		}
 
 		this.games.set(game, {
