@@ -13,6 +13,13 @@ export interface BundleInfo extends Record<string, unknown> {
 	"preset-name": string;
 }
 
+const SyncStateOption = "sync-state";
+export type SyncState = "sync" | "async";
+
+type BundleOptions = {
+	[SyncStateOption]: SyncState;
+};
+
 export interface GamesConfig extends Record<string, unknown> {
 	name: string;
 	game: Record<string, number>;
@@ -23,6 +30,7 @@ export interface GamesConfig extends Record<string, unknown> {
 	};
 	triggers?: Array<Record<string, unknown>>;
 	"x-bundleinfo": BundleInfo;
+	"x-options": BundleOptions;
 }
 
 namespace Triggers {
@@ -41,6 +49,7 @@ export async function makeBundle(
 	version: Version,
 	baseDir: string,
 	bundleInfo: BundleInfo,
+	syncState: SyncState,
 ): Promise<GamesConfig> {
 	const logger = _logger.child({ label: `bundle:${name}` });
 	const config: GamesConfig = {
@@ -48,11 +57,20 @@ export async function makeBundle(
 		game: {},
 		description: "Generated via bundler by niyrme (github: niyrme/archipelago-configs)",
 		requires: { version },
-		triggers: [],
+		"x-options": { [SyncStateOption]: syncState },
 		"x-bundleinfo": bundleInfo,
+		triggers: [],
 	};
+	const triggers: Array<Record<string, unknown>> = [];
 
 	const plandoRequires = new Set<string>();
+
+	type SyncAsyncTrigger = {
+		option_category: "x-options";
+		option_name: typeof SyncStateOption;
+		option_result: SyncState;
+		options: Record<string, Record<string, unknown>>;
+	};
 
 	type ParsedGameConfig = {
 		game: string;
@@ -62,7 +80,12 @@ export async function makeBundle(
 		};
 		name: string;
 		triggers: Array<Record<string, unknown>>;
+		"x-options-sync"?: Record<string, unknown>;
+		"x-options-async"?: Record<string, unknown>;
 	} & { [k: string]: Record<string, unknown> };
+
+	const syncOptions: Record<string, Record<string, unknown>> = {};
+	const asyncOptions: Record<string, Record<string, unknown>> = {};
 
 	for (const { file: fileName, weight } of bundle) {
 		if (weight === 0) {
@@ -79,7 +102,7 @@ export async function makeBundle(
 			throw `Config version mismatch (${name}): Global requries ${version}, but yaml has ${parsed.requires.version}`;
 		}
 		config.game[parsed.game] = weight;
-		config.triggers!.push(
+		triggers.push(
 			{
 				option_name: "game",
 				option_result: parsed.game,
@@ -96,21 +119,47 @@ export async function makeBundle(
 				plandoRequires.add(value);
 			}
 		}
-		const game = parsed[parsed.game];
-		if (!game) {
+		const gameOptions = parsed[parsed.game];
+		if (!gameOptions) {
 			throw `Config ${name} is missing game config: ${parsed.game}`;
 		}
+		if (parsed["x-options-sync"] && Object.keys(parsed["x-options-sync"]).length) {
+			syncOptions[parsed.game] = parsed["x-options-sync"];
+		}
+		if (parsed["x-options-async"] && Object.keys(parsed["x-options-async"]).length) {
+			asyncOptions[parsed.game] = parsed["x-options-async"];
+		}
+
 		if (plandoRequires.size) {
 			config.requires.plando = Array.from(plandoRequires.values()).join(", ");
 		}
-		config[parsed.game] = game;
+		config[parsed.game] = gameOptions;
 	}
 
 	if (Object.keys(config.game).length === 0) {
 		throw `Bundle ${name} did not resolve any games!`;
 	}
 
-	if (!config.triggers!.length) {
+	if (Object.keys(syncOptions).length) {
+		triggers.push({
+			option_category: "x-options",
+			option_name: SyncStateOption,
+			option_result: "sync",
+			options: syncOptions,
+		} satisfies SyncAsyncTrigger);
+	}
+	if (Object.keys(asyncOptions).length) {
+		triggers.push({
+			option_category: "x-options",
+			option_name: SyncStateOption,
+			option_result: "async",
+			options: asyncOptions,
+		} satisfies SyncAsyncTrigger);
+	}
+
+	if (triggers.length) {
+		config.triggers = triggers;
+	} else {
 		delete config.triggers;
 	}
 	return config;
