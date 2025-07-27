@@ -4,4 +4,4 @@ default:
 	just --list
 
 bundle PRESET="-l" SYNC="--sync":
-	bun run src {{PRESET}}
+	bun run src {{PRESET}} {{SYNC}}

@@ -1,5 +1,5 @@
 import * as z from "zod/v4-mini";
-import type { Version } from "./bundle";
+import type { Version } from "../types";
 
 const versionRegex = /^\d+\.\d+\.\d+$/;
 
