@@ -23,7 +23,7 @@ export default buildConfig({
 				weight: 199,
 			},
 			{
-				file: "Yacht.yaml",
+				file: "YachtDice.yaml",
 				weight: 100,
 			},
 		],
