@@ -15,8 +15,8 @@ requires:
 
   # general
   &EndGoal EndGoal:
-    &EndGoal_Finale finale: 7
-    &EndGoal_Rush rush_hour: 0 # 3
+    &EndGoal_Finale finale: 1
+    &EndGoal_Rush rush_hour: 0
     &EndGoal_Seal seal_the_deal: 0
   ShuffleStorybookPages: true
   ShuffleAlpineZiplines: true
@@ -29,22 +29,18 @@ requires:
   LogicDifficulty: "moderate"
   NoPaintingSkips: true
   CTRLogic:
-    time_stop_only: 0
-    scooter: 1
-    sprint: 0
-    nothing: 0
+    "time_stop_only": 0
+    "scooter": 1
+    "sprint": 0
+    "nothing": 0
 
   # acts
   ActRandomizer: "insanity"
   StartingChapter: "random"
-  LowestChapterCost: "random-range-low-4-7"
-  HighestChapterCost: "random-range-middle-25-30"
-  ChapterCostIncrement:
-    5: 1
-    6: 1
-  ChapterCostMinDifference:
-    4: 1
-    5: 1
+  LowestChapterCost: 5
+  HighestChapterCost: 25
+  ChapterCostIncrement: 5
+  ChapterCostMinDifference: 5
   &GoalMinCost FinalChapterMinCost: 30
   &GoalMaxCost FinalChapterMaxCost: 35
   FinaleShuffle: true
@@ -59,9 +55,9 @@ requires:
   MinExtraYarn: "random-range-middle-5-15"
   HatItems: true
   UmbrellaLogic: true
-  MaxExtraTimePieces: "random-range-middle-8-12"
+  MaxExtraTimePieces: "random-range-high-5-8"
   YarnBalancePercent: 25
-  TimePieceBalancePercent: "random-range-low-40-60"
+  TimePieceBalancePercent: "random-range-low-20-35"
 
   # DLC: Seal the Deal
   EnableDLC1: false
