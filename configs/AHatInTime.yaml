@@ -26,6 +26,7 @@ requires:
   MaxPonCost: 80
   BadgeSellerMinItems: 5
   BadgeSellerMaxItems: 8
+  # https://docs.google.com/document/d/1x9VLSQ5davfx1KGamR9T0mD5h69_lDXJ6H7Gq7knJRI
   LogicDifficulty: "moderate"
   NoPaintingSkips: true
   CTRLogic:
