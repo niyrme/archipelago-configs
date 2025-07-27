@@ -5,12 +5,6 @@ name: "niyrme-AHiT{NUMBER}"
 requires:
   version: 0.6.2
 
-x-option-presets:
-  - &OptionPresetSync "sync"
-  - &OptionPresetAsync "async"
-
-&OptionPreset "x-option.preset": *OptionPresetSync
-
 *AHiT :
   # game
   progression_balancing: "random-range-middle-40-50"
@@ -20,10 +14,10 @@ x-option-presets:
   death_link: true
 
   # general
-  &AHiTEndGoal EndGoal:
-    &AHiTGoalFinale finale: 7
-    &AHiTGoalRush rush_hour: 0 # 3
-    &AHiTGoalSeal seal_the_deal: 0
+  &EndGoal EndGoal:
+    &EndGoal_Finale finale: 7
+    &EndGoal_Rush rush_hour: 0 # 3
+    &EndGoal_Seal seal_the_deal: 0
   ShuffleStorybookPages: true
   ShuffleAlpineZiplines: true
   ShuffleSubconPaintings: true
@@ -78,7 +72,7 @@ x-option-presets:
   ExcludeTour: false
 
   # DLC: Nyakuza Metro
-  &AHiTDLCNyakuza EnableDLC2: true
+  &DLCNyakuza EnableDLC2: true
   MetroMinPonCost: 10
   MetroMaxPonCost: 50
   NyakuzaThugMinShopItems: 1
@@ -115,7 +109,7 @@ x-option-presets:
   exclude_locations:
     - "Queen Vanessa's Manor - Bedroom Chest"
     - "Queen Vanessa's Manor - Hall Chest"
-    - &LocationActCompletionTheBigParade "Act Completion (The Big Parade)"
+    - &Location_ActCompletionTheBigParade "Act Completion (The Big Parade)"
   priority_locations:
     - "Act Completion (Award Ceremony)"
     - "Badge Seller - Item 1"
@@ -136,43 +130,32 @@ x-option-presets:
   ActPlando:
     "Dead Bird Studio Basement": "The Big Parade"
 
-triggers:
-  # sync
-  - option_name: *OptionPreset
-    option_result: *OptionPresetSync
-    options:
-      *AHiT :
-        +triggers:
-          - option_category: *AHiT
-            option_name: *AHiTEndGoal
-            option_result: *AHiTGoalFinale
-            options:
-              *AHiT :
-                MinPonCost: 30
-                MaxPonCost: 100
-                *GoalMinCost : 25
-                *GoalMaxCost : 35
-                *AHiTDLCNyakuza : false
-  # async
-  - option_name: *OptionPreset
-    option_result: *OptionPresetAsync
-    options:
-      *AHiT :
-        progression_balancing: "random-range-low-10-30"
-        accessibility:
-          "full": 2
-          "minimal": 1
-        death_link: false
-        *AHiTEndGoal :
-          *AHiTGoalFinale : 7
-          *AHiTGoalRush : 3
-          *AHiTGoalSeal : 0
-        +non_local_items:
-          - "Brewing Hat"
-          - "Ice Hat"
-        -exclude_locations:
-          - *LocationActCompletionTheBigParade
-        priority_locations: []
-        ActPlando: {}
-        *GoalMinCost : 35
-        *GoalMaxCost : 40
+x-options-sync:
+  +triggers:
+    - option_category: *AHiT
+      option_name: *EndGoal
+      option_result: *EndGoal_Finale
+      options:
+        *AHiT :
+          MinPonCost: 30
+          MaxPonCost: 100
+          *GoalMinCost : 25
+          *GoalMaxCost : 35
+          *DLCNyakuza : false
+
+x-options-async:
+  progression_balancing: "random-range-low-10-30"
+  death_link: false
+  *EndGoal :
+    *EndGoal_Finale : 7
+    *EndGoal_Rush : 3
+    *EndGoal_Seal : 0
+  +non_local_items:
+    - "Brewing Hat"
+    - "Ice Hat"
+  -exclude_locations:
+    - *Location_ActCompletionTheBigParade
+  priority_locations: []
+  ActPlando: {}
+  *GoalMinCost : 35
+  *GoalMaxCost : 40
