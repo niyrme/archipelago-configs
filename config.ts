@@ -7,7 +7,7 @@ export default buildConfig({
 		requiredVersion: "0.6.2",
 	},
 	bundles: {
-		"NiyrmeMain{NUMBER}": [
+		"niyrme-main{NUMBER}": [
 			{
 				file: "AHatInTime.yaml",
 				weight: 99,
@@ -17,7 +17,7 @@ export default buildConfig({
 				weight: 100,
 			},
 		],
-		"NiyrmeSide{number}": [
+		"niyrme-side{number}": [
 			{
 				file: "STPPuzzleCollection.yaml",
 				weight: 199,
@@ -29,7 +29,7 @@ export default buildConfig({
 		],
 	},
 	presets: {
-		default: ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}", "bundle:NiyrmeSide{number}"],
-		short: ["bundle:NiyrmeMain{NUMBER}", "bundle:NiyrmeSide{number}"],
+		default: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}", "bundle:niyrme-side{number}"],
+		short: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}"],
 	},
 });
