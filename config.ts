@@ -27,9 +27,17 @@ export default buildConfig({
 				weight: 100,
 			},
 		],
+		"niyrme-AHiT": [{ file: "AHatInTime.yaml" }],
+		"niyrme-HK": [{ file: "HollowKnight.yaml" }],
+		"niyrme-STPPC": [{ file: "STPPuzzleCollection.yaml" }],
+		"niyrme-yacht": [{ file: "YachtDice.yaml" }],
 	},
 	presets: {
 		default: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}", "bundle:niyrme-side{number}"],
 		short: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}"],
+		"only:AHiT": ["bundle:niyrme-AHiT"],
+		"only:HK": ["bundle:niyrme-HK"],
+		"only:STPPC": ["bundle:niyrme-STPPC"],
+		"only:yacht": ["bundle:niyrme-yacht"],
 	},
 });
