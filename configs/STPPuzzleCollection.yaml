@@ -7,7 +7,7 @@ requires:
 
 *STPPC :
   # game
-  progression_balancing: "random-range-middle-30-50"
+  progression_balancing: "random-range-low-15-25"
   accessibility: "full"
 
   # puzzle optios
@@ -54,7 +54,7 @@ requires:
     "range": 0
     "rect": 0
     "samegame": 0
-    "signpost": 5
+    "signpost": 3
     "singles": 0
     "sixteen": 0
     "slant": 0
