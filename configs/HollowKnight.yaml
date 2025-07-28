@@ -131,6 +131,9 @@ requires:
   CostSanityGeoWeight: 0
 
   # plando
+  PlandoCharmCosts:
+    "Gathering_Swarm": 0
+    "Wayward_Compass": 0
   exclude_locations:
     - "Mask_Shard-Grey_Mourner"  # skill issue lmao
 
