@@ -35,6 +35,8 @@ export default buildConfig({
 	presets: {
 		default: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}", "bundle:niyrme-side{number}"],
 		short: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}"],
+		"only:main": ["bundle:niyrme-main{NUMBER}"],
+		"only:side": ["bundle:niyrme-side{number}"],
 		"only:AHiT": ["bundle:niyrme-AHiT"],
 		"only:HK": ["bundle:niyrme-HK"],
 		"only:STPPC": ["bundle:niyrme-STPPC"],
