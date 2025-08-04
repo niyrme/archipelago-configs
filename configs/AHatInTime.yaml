@@ -11,7 +11,7 @@ requires:
   accessibility:
     "full": 1
     "minimal": 0
-  death_link: true
+  death_link: false
 
   # general
   &EndGoal EndGoal:
@@ -143,6 +143,10 @@ x-options-sync:
 x-options-async:
   progression_balancing: "random-range-low-10-30"
   death_link: false
+  LowestChapterCost: 10
+  HighestChapterCost: 30
+  ChapterCostIncrement: 7
+  ChapterCostMinDifference: 7
   *EndGoal :
     *EndGoal_Finale : 7
     *EndGoal_Rush : 3
