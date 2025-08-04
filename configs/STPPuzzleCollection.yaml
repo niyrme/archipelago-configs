@@ -11,9 +11,9 @@ requires:
   accessibility: "full"
 
   # puzzle optios
-  puzzle_count: "random-range-middle-30-40"
+  puzzle_count: "random-range-middle-20-30"
   starting_puzzles: 2
-  completion_percentage: "random-range-high-75-85"
+  completion_percentage: 80
 
   min_difficulty:
     "easy": 1
@@ -43,18 +43,18 @@ requires:
     "loopy": 0
     "magnets": 0
     "map": 0
-    "mines": 1
+    &Genre_Mines "mines": 1
     "mosaic": 0
     "net": 0
     "netslide": 0
     "palisade": 0
-    "pattern": 10
+    &Genre_Pattern "pattern": 10
     "pearl": 0
     "pegs": 0
     "range": 0
     "rect": 0
     "samegame": 0
-    "signpost": 3
+    &Genre_Signpost "signpost": 2
     "singles": 0
     "sixteen": 0
     "slant": 0
@@ -66,4 +66,22 @@ requires:
     "undead": 0
     "unequal": 0
     "unruly": 0
-    "untangle": 1
+    &Genre_Untangle "untangle": 1
+
+  preset_overrides:
+    *Genre_Mines :
+      - "9x9n10"
+      - "13x13n30"
+      - "16x16n40"
+    *Genre_Pattern :
+      - "10x10"
+      - "15x15"
+    *Genre_Signpost :
+      - "4x4"
+      - "4x4c"
+    *Genre_Untangle :
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
