@@ -144,12 +144,12 @@ x-options-async:
   progression_balancing: "random-range-low-10-30"
   death_link: false
   LowestChapterCost: 10
-  HighestChapterCost: 30
+  HighestChapterCost: 40
   ChapterCostIncrement: 7
   ChapterCostMinDifference: 7
   *EndGoal :
-    *EndGoal_Finale : 7
-    *EndGoal_Rush : 3
+    *EndGoal_Finale : 9
+    *EndGoal_Rush : 1
     *EndGoal_Seal : 0
   +non_local_items:
     - "Brewing Hat"
@@ -158,5 +158,5 @@ x-options-async:
     - *Location_ActCompletionTheBigParade
   priority_locations: []
   ActPlando: {}
-  *GoalMinCost : 35
-  *GoalMaxCost : 40
+  *GoalMinCost : 40
+  *GoalMaxCost : 50
