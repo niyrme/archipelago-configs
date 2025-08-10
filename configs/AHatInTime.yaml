@@ -44,7 +44,7 @@ requires:
   ChapterCostMinDifference: 5
   &GoalMinCost FinalChapterMinCost: 30
   &GoalMaxCost FinalChapterMaxCost: 35
-  FinaleShuffle: true
+  FinaleShuffle: false
 
   # items
   StartWithCompassBadge: true
@@ -154,9 +154,6 @@ x-options-async:
   +non_local_items:
     - "Brewing Hat"
     - "Ice Hat"
-  -exclude_locations:
-    - *Location_ActCompletionTheBigParade
   priority_locations: []
-  ActPlando: {}
   *GoalMinCost : 40
   *GoalMaxCost : 50
