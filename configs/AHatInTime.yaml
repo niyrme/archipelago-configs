@@ -128,6 +128,8 @@ requires:
     "Dead Bird Studio Basement": "The Big Parade"
 
 x-options-sync:
+  +start_inventory_from_pool:
+    "Badge Pin": 1
   +triggers:
     - option_category: *AHiT
       option_name: *EndGoal
