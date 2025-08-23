@@ -1,6 +1,14 @@
 import type winston from "winston";
 import logging from "./logging";
-import type { GameOptions, GamesOptions, ParsedGameConfig, SyncState, TriggerObject, Version } from "../types";
+import type {
+	ExtraOptions,
+	GameOptions,
+	GamesOptions,
+	ParsedGameConfig,
+	SyncState,
+	TriggerObject,
+	Version,
+} from "../types";
 import { Trigger } from "./Trigger";
 
 const LabelOptions = "x-options";
@@ -36,6 +44,7 @@ export class Bundle {
 			slotName: string;
 			weight: number;
 			gameOptions: GameOptions;
+			extraOptions?: ExtraOptions;
 		}
 	>;
 	protected readonly gameOptionsSync: Map<string, GameOptions>;
@@ -82,6 +91,7 @@ export class Bundle {
 			slotName: parsedGameConfig.name,
 			weight,
 			gameOptions,
+			extraOptions: parsedGameConfig["x-options"],
 		});
 
 		if (parsedGameConfig.triggers?.length) {
@@ -113,9 +123,18 @@ export class Bundle {
 
 		const games: GamesOptions = {};
 
-		for (const [game, { slotName, gameOptions }] of this.games.entries()) {
+		const extraOptionsValues: Record<string, unknown> = {};
+		const extraOptionsTriggers: Array<Trigger | TriggerObject> = [];
+
+		for (const [game, { slotName, gameOptions, extraOptions }] of this.games.entries()) {
 			games[game] = gameOptions;
 			triggers.push(Trigger.Name(game, slotName));
+			if (extraOptions) {
+				for (const [name, option] of Object.entries(extraOptions)) {
+					extraOptionsValues[name] = option.enabled;
+					extraOptionsTriggers.push(new Trigger(name, true, option.options, "x-options"));
+				}
+			}
 		}
 
 		if (this.gameOptionsSync.size) {
@@ -125,7 +144,7 @@ export class Bundle {
 			triggers.push(Trigger.Async(Object.fromEntries(this.gameOptionsAsync.entries())));
 		}
 
-		triggers.push(...this.triggers);
+		triggers.push(...this.triggers, ...extraOptionsTriggers);
 
 		return {
 			name: this.name,
@@ -139,6 +158,7 @@ export class Bundle {
 			},
 			[LabelOptions]: {
 				[OptionLabelSyncState]: this.syncState,
+				...extraOptionsValues,
 			},
 			"x-bundleinfo": this.bundleInfo,
 			triggers,

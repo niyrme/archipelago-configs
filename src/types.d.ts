@@ -13,6 +13,13 @@ export type TriggerObject = {
 	options: Record<string, unknown>;
 };
 
+export type ExtraOption = {
+	enabled: boolean;
+	options: Record<string, unknown>;
+};
+
+export type ExtraOptions = Record<string, ExtraOption>;
+
 export type ParsedGameConfig = {
 	game: string;
 	name: string;
@@ -21,6 +28,7 @@ export type ParsedGameConfig = {
 		plando?: string;
 	};
 	triggers?: Array<TriggerObject>;
+	"x-options"?: ExtraOptions;
 	"x-options-sync"?: GameOptions;
 	"x-options-async"?: GameOptions;
 } & GamesOptions;

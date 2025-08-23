@@ -3,7 +3,7 @@ type TriggerOptions = Record<string, unknown>;
 export class Trigger {
 	constructor(
 		public readonly option_name: string,
-		public readonly option_result: string,
+		public readonly option_result: unknown,
 		public readonly options: TriggerOptions,
 		public readonly option_category?: string,
 	) {}
