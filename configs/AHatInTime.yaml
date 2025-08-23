@@ -153,9 +153,10 @@ x-options-async:
     *EndGoal_Finale : 9
     *EndGoal_Rush : 1
     *EndGoal_Seal : 0
+  NoPaintingSkips: false
+  *GoalMinCost : 40
+  *GoalMaxCost : 50
   +non_local_items:
     - "Brewing Hat"
     - "Ice Hat"
   priority_locations: []
-  *GoalMinCost : 40
-  *GoalMaxCost : 50
