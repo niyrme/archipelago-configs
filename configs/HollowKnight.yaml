@@ -3,7 +3,7 @@ game: &HollowKnight "Hollow Knight"
 name: "niyrme-HK{NUMBER}"
 
 requires:
-  version: 0.6.2
+  version: &Requires_Version 0.6.2
 
 *HollowKnight :
   # game
@@ -68,8 +68,8 @@ requires:
     &Goal_Radiance radiance: 0
     godhome: 0
     godhome_flower: 0
-    grub_hunt: 0
-  GrubHuntGoal: "random-high"
+    &Goal_GrubHunt grub_hunt: 0
+  GrubHuntGoal: "random-range-middle-36-46"
   WhitePalace:
     exclude: 0
     kingfragment: 0
@@ -93,7 +93,7 @@ requires:
   MinimumGeoPrice: 1
   MaximumGeoPrice: "random-range-middle-400-600"
   MinimumGrubPrice: 1
-  MaximumGrubPrice: "random-range-middle-20-30"
+  MaximumGrubPrice: "random-range-high-30-40"
   MinimumEssencePrice: 1
   MaximumEssencePrice: "random-range-middle-1200-1800"
   MinimumCharmPrice: 1
@@ -136,6 +136,24 @@ requires:
     "Wayward Compass": 0
   exclude_locations:
     - "Mask_Shard-Grey_Mourner"  # skill issue lmao
+
+&Options x-options:
+  &Option_GrubHuntLink GrubHuntLink:
+    enabled: true
+    options:
+      "":
+        requires:
+          version: *Requires_Version
+          plando: "items"
+      *HollowKnight :
+        Goal: *Goal_GrubHunt
+        GrubHuntGoal: "all"
+        +item_links:
+          - name: "grubs"
+            item_pool:
+              - "Grub"
+            replacement_item: "Grub"
+            link_replacement: true
 
 x-options-async:
   RandomizeGeoChests: true
