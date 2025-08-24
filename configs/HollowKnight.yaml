@@ -131,8 +131,15 @@ requires:
   CostSanityGeoWeight: 0
 
   # plando
+  non_local_items:
+    - "Dreamers"
+  starting_inventory:
+    "Gathering_Swarm": 1
   PlandoCharmCosts:
     "Gathering Swarm": 0
+    "Grimmchild": "random-range-0-2"
+    "Kingsoul": "random-range-0-3"
+    "Spore Shroom": 0
     "Wayward Compass": 0
   exclude_locations:
     - "Mask_Shard-Grey_Mourner"  # skill issue lmao
@@ -142,6 +149,7 @@ requires:
     enabled: true
     options:
       "":
+        name: "niyrme-grubs{NUMBER}"
         requires:
           version: *Requires_Version
           plando: "items"
@@ -156,10 +164,11 @@ requires:
             link_replacement: true
 
 x-options-async:
-  RandomizeGeoChests: true
-  RandomizeStags: true
-  RandomizeGeoRocks: true
-  RandomizeSoulTotems: true
-  RandomizeLoreTablets: true
-  Goal: *Goal_Radiance
-  StartingGeo: 0
+  *HollowKnight :
+    RandomizeGeoChests: true
+    RandomizeStags: true
+    RandomizeGeoRocks: true
+    RandomizeSoulTotems: true
+    RandomizeLoreTablets: true
+    Goal: *Goal_Radiance
+    StartingGeo: 0
