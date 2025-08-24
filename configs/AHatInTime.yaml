@@ -106,7 +106,7 @@ requires:
   exclude_locations:
     - "Queen Vanessa's Manor - Bedroom Chest"
     - "Queen Vanessa's Manor - Hall Chest"
-    - &Location_ActCompletionTheBigParade "Act Completion (The Big Parade)"
+    - "Act Completion (The Big Parade)"
   priority_locations:
     - "Act Completion (Award Ceremony)"
     - "Badge Seller - Item 1"
@@ -128,35 +128,37 @@ requires:
     "Dead Bird Studio Basement": "The Big Parade"
 
 x-options-sync:
-  +start_inventory_from_pool:
-    "Badge Pin": 1
-  +triggers:
-    - option_category: *AHiT
-      option_name: *EndGoal
-      option_result: *EndGoal_Finale
-      options:
-        *AHiT :
-          MinPonCost: 30
-          MaxPonCost: 100
-          *GoalMinCost : 25
-          *GoalMaxCost : 35
-          *DLCNyakuza : false
+  *AHiT :
+    +start_inventory_from_pool:
+      "Badge Pin": 1
+    +triggers:
+      - option_category: *AHiT
+        option_name: *EndGoal
+        option_result: *EndGoal_Finale
+        options:
+          *AHiT :
+            MinPonCost: 30
+            MaxPonCost: 100
+            *GoalMinCost : 25
+            *GoalMaxCost : 35
+            *DLCNyakuza : false
 
 x-options-async:
-  progression_balancing: "random-range-low-10-30"
-  death_link: false
-  LowestChapterCost: 10
-  HighestChapterCost: 40
-  ChapterCostIncrement: 7
-  ChapterCostMinDifference: 7
-  *EndGoal :
-    *EndGoal_Finale : 9
-    *EndGoal_Rush : 1
-    *EndGoal_Seal : 0
-  NoPaintingSkips: false
-  *GoalMinCost : 40
-  *GoalMaxCost : 50
-  +non_local_items:
-    - "Brewing Hat"
-    - "Ice Hat"
-  priority_locations: []
+  *AHiT :
+    progression_balancing: "random-range-low-10-30"
+    death_link: false
+    LowestChapterCost: 10
+    HighestChapterCost: 40
+    ChapterCostIncrement: 7
+    ChapterCostMinDifference: 7
+    *EndGoal :
+      *EndGoal_Finale : 9
+      *EndGoal_Rush : 1
+      *EndGoal_Seal : 0
+    NoPaintingSkips: false
+    *GoalMinCost : 40
+    *GoalMaxCost : 50
+    +non_local_items:
+      - "Brewing Hat"
+      - "Ice Hat"
+    priority_locations: []
