@@ -4,23 +4,23 @@ export type SyncState = "sync" | "async";
 
 export type GameOptions = Record<string, unknown>;
 
-export type GamesOptions = { [game: string]: GameOptions };
+export type GamesOptions = Record<string, GameOptions>;
 
-export type TriggerObject = {
+export interface TriggerObject extends Record<string, unknown> {
 	option_category?: string;
 	option_name: string;
 	option_result: unknown;
 	options: Record<string, unknown>;
-};
+}
 
-export type ExtraOption = {
+export interface ExtraOption {
 	enabled: boolean;
 	options: Record<string, unknown>;
-};
+}
 
 export type ExtraOptions = Record<string, ExtraOption>;
 
-export type ParsedGameConfig = {
+export interface ParsedGameConfig extends GamesOptions {
 	game: string;
 	name: string;
 	requires?: {
@@ -29,6 +29,6 @@ export type ParsedGameConfig = {
 	};
 	triggers?: Array<TriggerObject>;
 	"x-options"?: ExtraOptions;
-	"x-options-sync"?: GameOptions;
-	"x-options-async"?: GameOptions;
-} & GamesOptions;
+	"x-options-sync"?: GamesOptions;
+	"x-options-async"?: GamesOptions;
+}

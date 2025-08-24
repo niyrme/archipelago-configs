@@ -1,5 +1,4 @@
 import type winston from "winston";
-import logging from "./logging";
 import type {
 	ExtraOptions,
 	GameOptions,
@@ -9,10 +8,11 @@ import type {
 	TriggerObject,
 	Version,
 } from "../types";
+import logging from "./logging";
 import { Trigger } from "./Trigger";
 
-const LabelOptions = "x-options";
-const OptionLabelSyncState = "sync-state";
+export const LabelOptions = "x-options";
+export const OptionLabelSyncState = "sync-state";
 
 interface BundleInfo extends Record<string, unknown> {
 	"preset-name": string;
@@ -132,16 +132,28 @@ export class Bundle {
 			if (extraOptions) {
 				for (const [name, option] of Object.entries(extraOptions)) {
 					extraOptionsValues[name] = option.enabled;
-					extraOptionsTriggers.push(new Trigger(name, true, option.options, "x-options"));
+					extraOptionsTriggers.push(new Trigger(name, true, option.options, LabelOptions));
 				}
 			}
 		}
 
-		if (this.gameOptionsSync.size) {
-			triggers.push(Trigger.Sync(Object.fromEntries(this.gameOptionsSync.entries())));
+		for (const [game, options] of this.gameOptionsSync.entries()) {
+			triggers.push({
+				"x-from-game": game,
+				option_category: LabelOptions,
+				option_name: OptionLabelSyncState,
+				option_result: "sync",
+				options,
+			});
 		}
-		if (this.gameOptionsAsync.size) {
-			triggers.push(Trigger.Async(Object.fromEntries(this.gameOptionsAsync.entries())));
+		for (const [game, options] of this.gameOptionsAsync.entries()) {
+			triggers.push({
+				"x-from-game": game,
+				option_category: LabelOptions,
+				option_name: OptionLabelSyncState,
+				option_result: "async",
+				options,
+			});
 		}
 
 		triggers.push(...this.triggers, ...extraOptionsTriggers);

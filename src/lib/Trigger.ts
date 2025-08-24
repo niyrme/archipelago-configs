@@ -20,16 +20,4 @@ export class Trigger {
 	static Name(game: string, slotName: string): Trigger {
 		return new Trigger("game", game, { "": { name: slotName } });
 	}
-
-	static SyncAsync(syncState: "sync" | "async", options: TriggerOptions): Trigger {
-		return new Trigger("sync-state", syncState, options, "x-options");
-	}
-
-	static Sync(options: TriggerOptions): Trigger {
-		return Trigger.SyncAsync("sync", options);
-	}
-
-	static Async(options: TriggerOptions): Trigger {
-		return Trigger.SyncAsync("async", options);
-	}
 }
