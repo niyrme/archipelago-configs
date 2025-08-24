@@ -3,10 +3,16 @@
 	"editor.formatOnPaste": false,
 	"[javascript]": {
 		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit",
+		},
 	},
 	"[typescript]": {
 		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit",
+		},
+	},
 }
