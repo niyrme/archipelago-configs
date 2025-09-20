@@ -28,9 +28,9 @@ requires:
   RandomizeWhisperingRoots: true
   RandomizeBossEssence: true
   RandomizeGrubs: true
-  RandomizeMimics: false
+  RandomizeMimics: true
   RandomizeMaps: true
-  RandomizeStags: false
+  RandomizeStags: true
   RandomizeLifebloodCocoons: true
   RandomizeGrimmkinFlames: true
   RandomizeJournalEntries: false
@@ -166,7 +166,7 @@ requires:
 x-options-async:
   *HollowKnight :
     RandomizeGeoChests: true
-    RandomizeStags: true
+    RandomizeJournalEntries: true
     RandomizeGeoRocks: true
     RandomizeSoulTotems: true
     RandomizeLoreTablets: true
