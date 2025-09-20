@@ -33,8 +33,7 @@ export default buildConfig({
 		"niyrme-yacht": [{ file: "YachtDice.yaml" }],
 	},
 	presets: {
-		default: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}", "bundle:niyrme-side{number}"],
-		short: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}"],
+		default: ["bundle:niyrme-main{NUMBER}", "bundle:niyrme-side{number}"],
 		"only:main": ["bundle:niyrme-main{NUMBER}"],
 		"only:side": ["bundle:niyrme-side{number}"],
 		"only:AHiT": ["bundle:niyrme-AHiT"],
