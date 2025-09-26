@@ -146,7 +146,7 @@ requires:
 
 &Options x-options:
   &Option_GrubHuntLink GrubHuntLink:
-    enabled: true
+    enabled: false
     options:
       "":
         name: "niyrme-grubs{NUMBER}"
